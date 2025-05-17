@@ -17,7 +17,7 @@ import biomesoplenty.common.world.features.WorldGenBOPTallGrass;
 
 public class BiomeGenShrubland extends BOPOverworldBiome
 {
-	private static final Height biomeHeight = new Height(0.1F, 0.1F);
+	private static final Height biomeHeight = new Height(0.1F, 1.0F);
 	
 	public BiomeGenShrubland(int id)
 	{
