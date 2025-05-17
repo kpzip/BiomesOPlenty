@@ -9,42 +9,36 @@ import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import biomesoplenty.api.BOPItemHelper;
+
 import biomesoplenty.api.content.BOPCItems;
 import biomesoplenty.common.entities.ai.EntityAITemptArmor;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
-public class TemptEventHandler 
-{
-	@SubscribeEvent
-	public void onEntitySpawn(EntityJoinWorldEvent event)
-	{
-		Entity entity = event.entity;
+public class TemptEventHandler {
 
-		if (!(entity instanceof EntityLiving))
-			return;
+    @SubscribeEvent
+    public void onEntitySpawn(EntityJoinWorldEvent event) {
+        Entity entity = event.entity;
 
-		EntityAITasks tasks = ((EntityLiving)entity).tasks;
-		
-		if (entity instanceof EntityChicken) 
-		{
-			
-			tasks.addTask(3, new EntityAITemptArmor((EntityCreature)entity, 1F, BOPCItems.flowerBand, 0, false));
-		}
+        if (!(entity instanceof EntityLiving)) return;
 
-		if (entity instanceof EntitySheep) 
-		{
-			tasks.addTask(3, new EntityAITemptArmor((EntityCreature)entity, 1F, BOPCItems.flowerBand, 1, false));
-		}
+        EntityAITasks tasks = ((EntityLiving) entity).tasks;
 
-		if (entity instanceof EntityPig) 
-		{
-			tasks.addTask(4, new EntityAITemptArmor((EntityCreature)entity, 1F, BOPCItems.flowerBand, 2, false));
-		}
+        if (entity instanceof EntityChicken) {
 
-		if (entity instanceof EntityCow) 
-		{
-			tasks.addTask(3, new EntityAITemptArmor((EntityCreature)entity, 1F, BOPCItems.flowerBand, 3, false));
-		}
-	}
+            tasks.addTask(3, new EntityAITemptArmor((EntityCreature) entity, 1F, BOPCItems.flowerBand, 0, false));
+        }
+
+        if (entity instanceof EntitySheep) {
+            tasks.addTask(3, new EntityAITemptArmor((EntityCreature) entity, 1F, BOPCItems.flowerBand, 1, false));
+        }
+
+        if (entity instanceof EntityPig) {
+            tasks.addTask(4, new EntityAITemptArmor((EntityCreature) entity, 1F, BOPCItems.flowerBand, 2, false));
+        }
+
+        if (entity instanceof EntityCow) {
+            tasks.addTask(3, new EntityAITemptArmor((EntityCreature) entity, 1F, BOPCItems.flowerBand, 3, false));
+        }
+    }
 }

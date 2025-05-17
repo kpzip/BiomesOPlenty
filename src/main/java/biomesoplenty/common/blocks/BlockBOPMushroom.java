@@ -13,138 +13,135 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
 import biomesoplenty.BiomesOPlenty;
 import biomesoplenty.api.content.BOPCBlocks;
 
-public class BlockBOPMushroom extends BlockBush
-{
-	private static final String[] plants = new String[] {"toadstool", "portobello", "bluemilk", "glowshroom", "flatmushroom", "shadowshroom"};
-	private IIcon[] textures;
+public class BlockBOPMushroom extends BlockBush {
 
-	public BlockBOPMushroom()
-	{
-		super(Material.plants);
-		
-		this.setHardness(0.0F);
-		
-		this.setStepSound(Block.soundTypeGrass);
-		
-		this.setTickRandomly(true);
-		
-		float var4 = 0.2F;
-		
-		this.setBlockBounds(0.3F, 0.0F, 0.3F, 0.7F, 0.4F, 0.7F);
-	
-		this.setCreativeTab(BiomesOPlenty.tabBiomesOPlenty);
-	}
+    private static final String[] plants = new String[] { "toadstool", "portobello", "bluemilk", "glowshroom",
+        "flatmushroom", "shadowshroom" };
+    private IIcon[] textures;
 
-	@Override
-	public void registerBlockIcons(IIconRegister iconRegister)
-	{
-		textures = new IIcon[plants.length];
+    public BlockBOPMushroom() {
+        super(Material.plants);
 
-		for (int i = 0; i < plants.length; ++i)
-		{
-			textures[i] = iconRegister.registerIcon("biomesoplenty:" + plants[i]);
-		}
-	}
+        this.setHardness(0.0F);
 
-	@Override
-	public IIcon getIcon(int side, int meta)
-	{
-		if (meta < 0 || meta >= textures.length) 
-		{
-			meta = 0;
-		}
+        this.setStepSound(Block.soundTypeGrass);
 
-		return textures[meta];
-	}
+        this.setTickRandomly(true);
 
-	@Override
-	public int getRenderType()
-	{
-		return 1;
-	}
+        float var4 = 0.2F;
 
-	@Override
-	public int getLightValue(IBlockAccess world, int x, int y, int z)
-	{
-		int meta = world.getBlockMetadata(x, y, z);
-		
-		if (meta == 3)
-			return 6;
-		else
-			return 0;
-	}
+        this.setBlockBounds(0.3F, 0.0F, 0.3F, 0.7F, 0.4F, 0.7F);
 
-	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z)
-	{
-		int meta = world.getBlockMetadata(x, y, z);
+        this.setCreativeTab(BiomesOPlenty.tabBiomesOPlenty);
+    }
 
-		switch (meta)
-		{
-		case 0:
-			this.setBlockBounds(0.3F, 0.0F, 0.3F, 0.7F, 0.4F, 0.7F);
-			break;
+    @Override
+    public void registerBlockIcons(IIconRegister iconRegister) {
+        textures = new IIcon[plants.length];
 
-		default:
-			this.setBlockBounds(0.3F, 0.0F, 0.3F, 0.7F, 0.4F, 0.7F);
-			break;
-		}
-	}
+        for (int i = 0; i < plants.length; ++i) {
+            textures[i] = iconRegister.registerIcon("biomesoplenty:" + plants[i]);
+        }
+    }
 
-	@Override
-	public void getSubBlocks(Item block, CreativeTabs creativeTabs, List list) 
-	{
-		for (int i = 0; i < plants.length; ++i) 
-		{
-			list.add(new ItemStack(block, 1, i));
-		}
-	}
-	
-	public boolean isValidPosition(World world, int x, int y, int z, int metadata)
-	{
-		//TODO:					  getBlock()
-		Block block = world.getBlock(x, y - 1, z);
-		
-		switch (metadata)
-		{
-		case 0: // Toadstool
-			return block == Blocks.grass || block == Blocks.dirt || block == Blocks.mycelium || block == Blocks.netherrack || block == BOPCBlocks.overgrownNetherrack;
+    @Override
+    public IIcon getIcon(int side, int meta) {
+        if (meta < 0 || meta >= textures.length) {
+            meta = 0;
+        }
 
-		case 1: // Portobello
-			return block == Blocks.grass || block == Blocks.dirt || block == Blocks.mycelium;
+        return textures[meta];
+    }
 
-		case 2: // Blue Milk Cap
-			return block == Blocks.grass || block == Blocks.dirt || block == Blocks.mycelium;
+    @Override
+    public int getRenderType() {
+        return 1;
+    }
 
-		case 3: // Glowshroom
-			return block == Blocks.grass || block == Blocks.dirt || block == Blocks.mycelium || block == Blocks.stone || block == Blocks.netherrack || block == BOPCBlocks.overgrownNetherrack;
+    @Override
+    public int getLightValue(IBlockAccess world, int x, int y, int z) {
+        int meta = world.getBlockMetadata(x, y, z);
 
-		case 5: // Shadow Shroom
-			return block == Blocks.grass || block == Blocks.dirt || block == Blocks.mycelium || block == Blocks.end_stone || block == BOPCBlocks.bopGrass;
-			
-		default:
-			return block == Blocks.grass || block == Blocks.dirt || block == Blocks.mycelium || block == BOPCBlocks.overgrownNetherrack || block == BOPCBlocks.bopGrass;
-		}
-	}
+        if (meta == 3) return 6;
+        else return 0;
+    }
 
-	@Override
-	public boolean canPlaceBlockOnSide(World world, int x, int y, int z, int side)
-	{
-		return isValidPosition(world, x, y, z, -1);
-	} 
+    @Override
+    public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
+        int meta = world.getBlockMetadata(x, y, z);
 
-	@Override
-	public boolean canBlockStay(World world, int x, int y, int z)
-	{
-		return isValidPosition(world, x, y, z, -1);
-	}
+        switch (meta) {
+            case 0:
+                this.setBlockBounds(0.3F, 0.0F, 0.3F, 0.7F, 0.4F, 0.7F);
+                break;
 
-	@Override
-	public int damageDropped(int meta)
-	{
-		return meta & 15;
-	}
+            default:
+                this.setBlockBounds(0.3F, 0.0F, 0.3F, 0.7F, 0.4F, 0.7F);
+                break;
+        }
+    }
+
+    @Override
+    public void getSubBlocks(Item block, CreativeTabs creativeTabs, List list) {
+        for (int i = 0; i < plants.length; ++i) {
+            list.add(new ItemStack(block, 1, i));
+        }
+    }
+
+    public boolean isValidPosition(World world, int x, int y, int z, int metadata) {
+        // TODO: getBlock()
+        Block block = world.getBlock(x, y - 1, z);
+
+        switch (metadata) {
+            case 0: // Toadstool
+                return block == Blocks.grass || block == Blocks.dirt
+                    || block == Blocks.mycelium
+                    || block == Blocks.netherrack
+                    || block == BOPCBlocks.overgrownNetherrack;
+
+            case 1: // Portobello
+                return block == Blocks.grass || block == Blocks.dirt || block == Blocks.mycelium;
+
+            case 2: // Blue Milk Cap
+                return block == Blocks.grass || block == Blocks.dirt || block == Blocks.mycelium;
+
+            case 3: // Glowshroom
+                return block == Blocks.grass || block == Blocks.dirt
+                    || block == Blocks.mycelium
+                    || block == Blocks.stone
+                    || block == Blocks.netherrack
+                    || block == BOPCBlocks.overgrownNetherrack;
+
+            case 5: // Shadow Shroom
+                return block == Blocks.grass || block == Blocks.dirt
+                    || block == Blocks.mycelium
+                    || block == Blocks.end_stone
+                    || block == BOPCBlocks.bopGrass;
+
+            default:
+                return block == Blocks.grass || block == Blocks.dirt
+                    || block == Blocks.mycelium
+                    || block == BOPCBlocks.overgrownNetherrack
+                    || block == BOPCBlocks.bopGrass;
+        }
+    }
+
+    @Override
+    public boolean canPlaceBlockOnSide(World world, int x, int y, int z, int side) {
+        return isValidPosition(world, x, y, z, -1);
+    }
+
+    @Override
+    public boolean canBlockStay(World world, int x, int y, int z) {
+        return isValidPosition(world, x, y, z, -1);
+    }
+
+    @Override
+    public int damageDropped(int meta) {
+        return meta & 15;
+    }
 }

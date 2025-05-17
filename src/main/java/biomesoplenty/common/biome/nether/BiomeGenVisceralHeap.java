@@ -3,10 +3,9 @@ package biomesoplenty.common.biome.nether;
 import biomesoplenty.api.content.BOPCBlocks;
 import biomesoplenty.common.biome.BOPNetherBiome;
 
-public class BiomeGenVisceralHeap extends BOPNetherBiome
-{
-    public BiomeGenVisceralHeap(int id)
-    {
+public class BiomeGenVisceralHeap extends BOPNetherBiome {
+
+    public BiomeGenVisceralHeap(int id) {
         super(id);
 
         this.setColor(11091006);

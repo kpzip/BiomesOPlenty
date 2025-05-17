@@ -11,116 +11,102 @@ import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
 import biomesoplenty.BiomesOPlenty;
 import biomesoplenty.api.content.BOPCItems;
 
-public class BlockBOPGems extends Block
-{
-	public static final String[] types = new String[] {"amethystore", "amethystblock", "rubyore", "rubyblock", "peridotore", "peridotblock", "topazore", "topazblock", "tanzaniteore", "tanzaniteblock", "malachiteore", "malachiteblock", "sapphireore", "sapphireblock", "amberore", "amberblock"};
-	private IIcon[] textures;
+public class BlockBOPGems extends Block {
 
-	public BlockBOPGems()
-	{
-		super(Material.rock);
-		
-		this.setHarvestLevel("pickaxe", 3, 0);
-		
-		for (int i = 1; i < 16; i++)
-		{
-			this.setHarvestLevel("pickaxe", 2, i);
-		}
-		
-		this.setStepSound(Block.soundTypePiston);
-		
-		this.setCreativeTab(BiomesOPlenty.tabBiomesOPlenty);
-	}
+    public static final String[] types = new String[] { "amethystore", "amethystblock", "rubyore", "rubyblock",
+        "peridotore", "peridotblock", "topazore", "topazblock", "tanzaniteore", "tanzaniteblock", "malachiteore",
+        "malachiteblock", "sapphireore", "sapphireblock", "amberore", "amberblock" };
+    private IIcon[] textures;
 
-	@Override
-	public void registerBlockIcons(IIconRegister iconRegister)
-	{
-		textures = new IIcon[types.length];
+    public BlockBOPGems() {
+        super(Material.rock);
 
-		for (int i = 0; i < types.length; ++i) {
-			textures[i] = iconRegister.registerIcon("biomesoplenty:"+types[i]);
-		}
-	}
+        this.setHarvestLevel("pickaxe", 3, 0);
 
-	@Override
-	public IIcon getIcon(int side, int meta)
-	{
-		if (meta < 0 || meta >= textures.length) {
-			meta = 0;
-		}
+        for (int i = 1; i < 16; i++) {
+            this.setHarvestLevel("pickaxe", 2, i);
+        }
 
-		return textures[meta];
-	}
+        this.setStepSound(Block.soundTypePiston);
 
-	@Override
-	public int getDamageValue(World world, int x, int y, int z) 
-	{
-		return world.getBlockMetadata(x, y, z);
-	}
+        this.setCreativeTab(BiomesOPlenty.tabBiomesOPlenty);
+    }
 
-	@Override
-	public void getSubBlocks(Item block, CreativeTabs creativeTabs, List list) 
-	{
-		for (int i = 0; i < types.length; ++i) 
-		{
-			list.add(new ItemStack(block, 1, i));
-		}
-	}
+    @Override
+    public void registerBlockIcons(IIconRegister iconRegister) {
+        textures = new IIcon[types.length];
 
-	@Override
-	public float getBlockHardness(World world, int x, int y, int z)
-	{
-		int meta = world.getBlockMetadata(x, y, z);
+        for (int i = 0; i < types.length; ++i) {
+            textures[i] = iconRegister.registerIcon("biomesoplenty:" + types[i]);
+        }
+    }
 
-		return (meta % 2 == 0) ? 3.0F : 5.0F;
-	}
+    @Override
+    public IIcon getIcon(int side, int meta) {
+        if (meta < 0 || meta >= textures.length) {
+            meta = 0;
+        }
 
-	@Override
-	public float getExplosionResistance(Entity par1Entity, World world, int x, int y, int z, double explosionX, double explosionY, double explosionZ)
-	{
-		int meta = world.getBlockMetadata(x, y, z);
+        return textures[meta];
+    }
 
-		return (meta % 2 == 0) ? 1.0F : 2.0F;
-	}
+    @Override
+    public int getDamageValue(World world, int x, int y, int z) {
+        return world.getBlockMetadata(x, y, z);
+    }
 
-	@Override
-	public Item getItemDropped(int metadata, Random random, int fortune)
-	{
-		return (metadata % 2 == 0) ? BOPCItems.gems : super.getItemDropped(metadata, random, fortune);
-	}
+    @Override
+    public void getSubBlocks(Item block, CreativeTabs creativeTabs, List list) {
+        for (int i = 0; i < types.length; ++i) {
+            list.add(new ItemStack(block, 1, i));
+        }
+    }
 
-	@Override
-	public int damageDropped(int meta)
-	{
-		return (meta % 2 == 0) ? meta / 2 : meta;
-	}
+    @Override
+    public float getBlockHardness(World world, int x, int y, int z) {
+        int meta = world.getBlockMetadata(x, y, z);
 
-	@Override
-	public int quantityDropped(int meta, int fortune, Random random)
-	{
-		return (meta % 2 == 0) ? quantityDroppedWithBonus(fortune, random) : 1;
-	}
+        return (meta % 2 == 0) ? 3.0F : 5.0F;
+    }
 
-	@Override
-	public int quantityDroppedWithBonus(int bonus, Random random)
-	{
-		if (bonus > 0 && Item.getItemFromBlock(this) != this.getItemDropped(0, random, bonus))
-		{
-			int rnd = random.nextInt(bonus + 2) - 1;
+    @Override
+    public float getExplosionResistance(Entity par1Entity, World world, int x, int y, int z, double explosionX,
+        double explosionY, double explosionZ) {
+        int meta = world.getBlockMetadata(x, y, z);
 
-			if (rnd < 0) 
-			{
-				rnd = 0;
-			}
+        return (meta % 2 == 0) ? 1.0F : 2.0F;
+    }
 
-			return this.quantityDropped(random) * (rnd + 1);
-		}
-		else
-			return this.quantityDropped(random);
-	}
+    @Override
+    public Item getItemDropped(int metadata, Random random, int fortune) {
+        return (metadata % 2 == 0) ? BOPCItems.gems : super.getItemDropped(metadata, random, fortune);
+    }
+
+    @Override
+    public int damageDropped(int meta) {
+        return (meta % 2 == 0) ? meta / 2 : meta;
+    }
+
+    @Override
+    public int quantityDropped(int meta, int fortune, Random random) {
+        return (meta % 2 == 0) ? quantityDroppedWithBonus(fortune, random) : 1;
+    }
+
+    @Override
+    public int quantityDroppedWithBonus(int bonus, Random random) {
+        if (bonus > 0 && Item.getItemFromBlock(this) != this.getItemDropped(0, random, bonus)) {
+            int rnd = random.nextInt(bonus + 2) - 1;
+
+            if (rnd < 0) {
+                rnd = 0;
+            }
+
+            return this.quantityDropped(random) * (rnd + 1);
+        } else return this.quantityDropped(random);
+    }
 }

@@ -5,64 +5,53 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
+
 import biomesoplenty.api.biome.BOPBiome;
 import biomesoplenty.api.content.BOPCBlocks;
 import biomesoplenty.common.world.generation.WorldGeneratorBOP;
 
-public class WorldGenGrave extends WorldGeneratorBOP
-{
-	@Override
-	public boolean generate(World world, Random random, int x, int y, int z)
-	{
-		while (world.isAirBlock(x, y, z) && y > 2)
-		{
-			--y;
-		}
+public class WorldGenGrave extends WorldGeneratorBOP {
 
-		Block block = world.getBlock(x, y, z);
+    @Override
+    public boolean generate(World world, Random random, int x, int y, int z) {
+        while (world.isAirBlock(x, y, z) && y > 2) {
+            --y;
+        }
 
-		if (block != Blocks.netherrack && block != Blocks.soul_sand)
-		{
-			return false;
-		}
-		else
-		{
-			for (int var7 = -2; var7 <= 2; ++var7)
-			{
-				for (int var8 = -2; var8 <= 2; ++var8)
-				{
-					if (world.isAirBlock(x + var7, y - 1, z + var8) && world.isAirBlock(x + var7, y - 2, z + var8) && !world.isAirBlock(x + var7, y, z + var8))
-						return false;
-				}
-			}
+        Block block = world.getBlock(x, y, z);
 
-			int orientation = random.nextInt(4);
+        if (block != Blocks.netherrack && block != Blocks.soul_sand) {
+            return false;
+        } else {
+            for (int var7 = -2; var7 <= 2; ++var7) {
+                for (int var8 = -2; var8 <= 2; ++var8) {
+                    if (world.isAirBlock(x + var7, y - 1, z + var8) && world.isAirBlock(x + var7, y - 2, z + var8)
+                        && !world.isAirBlock(x + var7, y, z + var8)) return false;
+                }
+            }
 
-			if (orientation == 0 || orientation == 1)
-			{
-				world.setBlock(x, y + 1, z, BOPCBlocks.grave, 0, 2);
-				world.setBlock(x, y + 2, z, BOPCBlocks.grave, 1, 2);
-			}
-			else
-			{
-				world.setBlock(x, y + 1, z, BOPCBlocks.grave, 2, 2);
-				world.setBlock(x, y + 2, z, BOPCBlocks.grave, 3, 2);
-			}
+            int orientation = random.nextInt(4);
 
-			return true;
-		}
-	}
+            if (orientation == 0 || orientation == 1) {
+                world.setBlock(x, y + 1, z, BOPCBlocks.grave, 0, 2);
+                world.setBlock(x, y + 2, z, BOPCBlocks.grave, 1, 2);
+            } else {
+                world.setBlock(x, y + 1, z, BOPCBlocks.grave, 2, 2);
+                world.setBlock(x, y + 2, z, BOPCBlocks.grave, 3, 2);
+            }
 
-	@Override
-	public void setupGeneration(World world, Random random, BOPBiome biome, String featureName, int x, int z) 
-	{
-		for (int i = 0; i < (Integer)biome.theBiomeDecorator.bopFeatures.getFeature(featureName); i++)
-		{
-			int randX = x + random.nextInt(16) + 8;
-			int randZ = z + random.nextInt(16) + 8;
-			int randY = random.nextInt(256);
+            return true;
+        }
+    }
+
+    @Override
+    public void setupGeneration(World world, Random random, BOPBiome biome, String featureName, int x, int z) {
+        for (int i = 0; i < (Integer) biome.theBiomeDecorator.bopFeatures.getFeature(featureName); i++) {
+            int randX = x + random.nextInt(16) + 8;
+            int randZ = z + random.nextInt(16) + 8;
+            int randY = random.nextInt(256);
 
             this.generate(world, random, randX, randY, randZ);
-		}
-	}
+        }
+    }
 }

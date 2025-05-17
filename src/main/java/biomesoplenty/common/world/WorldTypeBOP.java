@@ -7,31 +7,29 @@ import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.GenLayerBiomeEdge;
 import net.minecraft.world.gen.layer.GenLayerZoom;
 import net.minecraftforge.common.DimensionManager;
+
 import biomesoplenty.common.world.layer.GenLayerBiomeBOP;
 
-public class WorldTypeBOP extends WorldType
-{
-	public WorldTypeBOP() 
-	{
+public class WorldTypeBOP extends WorldType {
+
+    public WorldTypeBOP() {
         super("BIOMESOP");
-        
+
         DimensionManager.unregisterProviderType(0);
         DimensionManager.registerProviderType(0, WorldProviderSurfaceBOP.class, true);
-	}
+    }
 
     @Override
-	public GenLayer getBiomeLayer(long worldSeed, GenLayer parentLayer)
-    {
+    public GenLayer getBiomeLayer(long worldSeed, GenLayer parentLayer) {
         GenLayer ret = new GenLayerBiomeBOP(200L, parentLayer, this);
 
         ret = GenLayerZoom.magnify(1000L, ret, 2);
         ret = new GenLayerBiomeEdge(1000L, ret);
         return ret;
     }
-    
+
     @Override
-	public WorldChunkManager getChunkManager(World world)
-    {
-    	return new WorldChunkManagerBOP(world);
+    public WorldChunkManager getChunkManager(World world) {
+        return new WorldChunkManagerBOP(world);
     }
 }

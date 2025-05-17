@@ -7,86 +7,75 @@ import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.player.EntityInteractEvent;
+
 import biomesoplenty.api.content.BOPCItems;
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
-public class DyeEventHandler 
-{
-	@SubscribeEvent
-	public void entityInteract(EntityInteractEvent event)
-	{
-		ItemStack itemstack = event.entityPlayer.getCurrentEquippedItem();
-		Entity entity = event.target;
-		EntityPlayer player = event.entityPlayer;
+public class DyeEventHandler {
 
-		if (itemstack != null)
-		{
-			int itemDamage = itemstack.getItemDamage();
+    @SubscribeEvent
+    public void entityInteract(EntityInteractEvent event) {
+        ItemStack itemstack = event.entityPlayer.getCurrentEquippedItem();
+        Entity entity = event.target;
+        EntityPlayer player = event.entityPlayer;
 
-			if (itemstack.getItem() == BOPCItems.misc && (itemDamage == 5 || itemDamage == 6 || itemDamage == 7 || itemDamage == 8 || itemDamage == 9))    
-			{
-				int dyeMeta = convertToDyeMeta(itemDamage);    
-				//TODO:				 getBlockFromDye()
-				int i = BlockColored.func_150032_b(dyeMeta);
+        if (itemstack != null) {
+            int itemDamage = itemstack.getItemDamage();
 
-				if (entity instanceof EntityWolf)
-				{
-					EntityWolf entitywolf = (EntityWolf)entity;
+            if (itemstack.getItem() == BOPCItems.misc
+                && (itemDamage == 5 || itemDamage == 6 || itemDamage == 7 || itemDamage == 8 || itemDamage == 9)) {
+                int dyeMeta = convertToDyeMeta(itemDamage);
+                // TODO: getBlockFromDye()
+                int i = BlockColored.func_150032_b(dyeMeta);
 
-					if (i != entitywolf.getCollarColor())
-					{
-						entitywolf.setCollarColor(i)
-						;
-						if (!event.entityPlayer.capabilities.isCreativeMode)
-						{
-							--itemstack.stackSize;
-						}
+                if (entity instanceof EntityWolf) {
+                    EntityWolf entitywolf = (EntityWolf) entity;
 
-						event.setResult(Result.ALLOW);
-					}
-				}
-				else if (entity instanceof EntitySheep)
-				{
-					EntitySheep entitysheep = (EntitySheep)entity;
+                    if (i != entitywolf.getCollarColor()) {
+                        entitywolf.setCollarColor(i);
+                        if (!event.entityPlayer.capabilities.isCreativeMode) {
+                            --itemstack.stackSize;
+                        }
 
-					if (!entitysheep.getSheared() && entitysheep.getFleeceColor() != i)
-					{
-						entitysheep.setFleeceColor(i);
+                        event.setResult(Result.ALLOW);
+                    }
+                } else if (entity instanceof EntitySheep) {
+                    EntitySheep entitysheep = (EntitySheep) entity;
 
-						if (!event.entityPlayer.capabilities.isCreativeMode)
-						{
-							--itemstack.stackSize;
-						}
-					}
+                    if (!entitysheep.getSheared() && entitysheep.getFleeceColor() != i) {
+                        entitysheep.setFleeceColor(i);
 
-					event.setResult(Result.ALLOW);
-				}
-			}
-		}
-	}
+                        if (!event.entityPlayer.capabilities.isCreativeMode) {
+                            --itemstack.stackSize;
+                        }
+                    }
 
-	private int convertToDyeMeta(int meta)
-	{
-		switch (meta)
-		{
-		case 5:
-			return 4;
+                    event.setResult(Result.ALLOW);
+                }
+            }
+        }
+    }
 
-		case 6:
-			return 3;
+    private int convertToDyeMeta(int meta) {
+        switch (meta) {
+            case 5:
+                return 4;
 
-		case 7:
-			return 2;
+            case 6:
+                return 3;
 
-		case 8:
-			return 15;
+            case 7:
+                return 2;
 
-		case 9:
-			return 0;
+            case 8:
+                return 15;
 
-		default:
-			return 0;
-		}
-	}
+            case 9:
+                return 0;
+
+            default:
+                return 0;
+        }
+    }
 }

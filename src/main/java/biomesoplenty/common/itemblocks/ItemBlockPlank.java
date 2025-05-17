@@ -4,33 +4,31 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-public class ItemBlockPlank extends ItemBlock
-{
-	private static final String[] woodTypes = new String[] {"sacredoakPlank", "cherryPlank", "darkPlank", "firPlank", "holyPlank", "magicPlank", "mangrovePlank", "palmPlank", "redwoodPlank", "willowPlank", "bambooThatching", "pinePlank", "hellBarkPlank", "jacarandaPlank", "mahoganyPlank"};
+public class ItemBlockPlank extends ItemBlock {
 
-	public ItemBlockPlank(Block block)
-	{
-		super(block);
-		
-		this.setMaxDamage(0);
-		this.setHasSubtypes(true);
-	}
+    private static final String[] woodTypes = new String[] { "sacredoakPlank", "cherryPlank", "darkPlank", "firPlank",
+        "holyPlank", "magicPlank", "mangrovePlank", "palmPlank", "redwoodPlank", "willowPlank", "bambooThatching",
+        "pinePlank", "hellBarkPlank", "jacarandaPlank", "mahoganyPlank" };
 
-	@Override
-	public int getMetadata(int meta)
-	{
-		return meta & 15;
-	}
+    public ItemBlockPlank(Block block) {
+        super(block);
 
-	@Override
-	public String getUnlocalizedName(ItemStack itemStack)
-	{
-		int meta = itemStack.getItemDamage();
-		if (meta < 0 || meta >= woodTypes.length) 
-		{
-			meta = 0;
-		}
+        this.setMaxDamage(0);
+        this.setHasSubtypes(true);
+    }
 
-		return super.getUnlocalizedName() + "." + woodTypes[meta];
-	}
+    @Override
+    public int getMetadata(int meta) {
+        return meta & 15;
+    }
+
+    @Override
+    public String getUnlocalizedName(ItemStack itemStack) {
+        int meta = itemStack.getItemDamage();
+        if (meta < 0 || meta >= woodTypes.length) {
+            meta = 0;
+        }
+
+        return super.getUnlocalizedName() + "." + woodTypes[meta];
+    }
 }

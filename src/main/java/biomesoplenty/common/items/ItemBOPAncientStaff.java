@@ -7,77 +7,66 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+
 import biomesoplenty.BiomesOPlenty;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemBOPAncientStaff extends Item
-{
-	private static String[] parts = {"ancientstaff", "staffhandle", "staffpole", "stafftopper", "ancientstaffbroken"};
-	@SideOnly(Side.CLIENT)
-	private IIcon[] textures;
+public class ItemBOPAncientStaff extends Item {
 
-	public ItemBOPAncientStaff()
-	{
-		this.maxStackSize = 1;
-		this.setHasSubtypes(true);
-		this.setCreativeTab(BiomesOPlenty.tabBiomesOPlenty);
-	}
-	
-	@Override
-    public boolean isFull3D()
-    {
-		return true;
+    private static String[] parts = { "ancientstaff", "staffhandle", "staffpole", "stafftopper", "ancientstaffbroken" };
+    @SideOnly(Side.CLIENT)
+    private IIcon[] textures;
+
+    public ItemBOPAncientStaff() {
+        this.maxStackSize = 1;
+        this.setHasSubtypes(true);
+        this.setCreativeTab(BiomesOPlenty.tabBiomesOPlenty);
     }
 
-	@Override
-	public boolean hasEffect(ItemStack itemStack, int pass)
-	{
-		if (itemStack.getItemDamage() == 0)
-			return true;
-		else
-			return false;
-	}
+    @Override
+    public boolean isFull3D() {
+        return true;
+    }
 
-	@Override
-	public void registerIcons(IIconRegister iconRegister)
-	{
-		textures = new IIcon[parts.length];
+    @Override
+    public boolean hasEffect(ItemStack itemStack, int pass) {
+        if (itemStack.getItemDamage() == 0) return true;
+        else return false;
+    }
 
-		for (int i = 0; i < parts.length; ++i) 
-		{
-			textures[i] = iconRegister.registerIcon("biomesoplenty:" + parts[i]);
-		}
-	}
+    @Override
+    public void registerIcons(IIconRegister iconRegister) {
+        textures = new IIcon[parts.length];
 
-	@Override
-	public String getUnlocalizedName(ItemStack itemStack)
-	{
-		int meta = itemStack.getItemDamage();
-		if (meta < 0 || meta >= parts.length) {
-			meta = 0;
-		}
+        for (int i = 0; i < parts.length; ++i) {
+            textures[i] = iconRegister.registerIcon("biomesoplenty:" + parts[i]);
+        }
+    }
 
-		return super.getUnlocalizedName() + "." + parts[meta];
-	}
+    @Override
+    public String getUnlocalizedName(ItemStack itemStack) {
+        int meta = itemStack.getItemDamage();
+        if (meta < 0 || meta >= parts.length) {
+            meta = 0;
+        }
 
-	@Override
-	public IIcon getIconFromDamage(int meta)
-	{
-		if (meta < 0 || meta >= textures.length) 
-		{
-			meta = 0;
-		}
+        return super.getUnlocalizedName() + "." + parts[meta];
+    }
 
-		return textures[meta];
-	}
+    @Override
+    public IIcon getIconFromDamage(int meta) {
+        if (meta < 0 || meta >= textures.length) {
+            meta = 0;
+        }
 
-	@Override
-    public void getSubItems(Item item, CreativeTabs creativeTabs, List list)
-	{
-		for (int meta = 0; meta < parts.length; ++meta) 
-		{
-			list.add(new ItemStack(item, 1, meta));
-		}
-	}
+        return textures[meta];
+    }
+
+    @Override
+    public void getSubItems(Item item, CreativeTabs creativeTabs, List list) {
+        for (int meta = 0; meta < parts.length; ++meta) {
+            list.add(new ItemStack(item, 1, meta));
+        }
+    }
 }

@@ -19,42 +19,43 @@ import forestry.api.genetics.ISpeciesRoot;
 
 public interface IButterflyRoot extends ISpeciesRoot {
 
-	boolean isMember(ItemStack stack);
+    boolean isMember(ItemStack stack);
 
-	IButterfly getMember(ItemStack stack);
+    IButterfly getMember(ItemStack stack);
 
-	IButterfly getMember(NBTTagCompound compound);
-	
-	ItemStack getMemberStack(IIndividual butterfly, int type);
+    IButterfly getMember(NBTTagCompound compound);
 
-	/* GENOME CONVERSION */
-	IButterfly templateAsIndividual(IAllele[] template);
-	
-	IButterfly templateAsIndividual(IAllele[] templateActive, IAllele[] templateInactive);
-	
-	IButterflyGenome templateAsGenome(IAllele[] template);
+    ItemStack getMemberStack(IIndividual butterfly, int type);
 
-	IButterflyGenome templateAsGenome(IAllele[] templateActive, IAllele[] templateInactive);
+    /* GENOME CONVERSION */
+    IButterfly templateAsIndividual(IAllele[] template);
 
-	/* BUTTERFLY SPECIFIC */
-	ILepidopteristTracker getBreedingTracker(World world, String player);
+    IButterfly templateAsIndividual(IAllele[] templateActive, IAllele[] templateInactive);
 
-	/**
-	 * Spawns the given butterfly in the world.
-	 * @param butterfly
-	 * @return butterfly entity on success, null otherwise.
-	 */
-	EntityLiving spawnButterflyInWorld(World world, IButterfly butterfly, double x, double y, double z);
+    IButterflyGenome templateAsGenome(IAllele[] template);
 
-	/**
-	 * @return true if passed item is mated.
-	 */
-	boolean isMated(ItemStack stack);
+    IButterflyGenome templateAsGenome(IAllele[] templateActive, IAllele[] templateInactive);
 
-	/* TEMPLATES */
-	ArrayList<IButterfly> getIndividualTemplates();
+    /* BUTTERFLY SPECIFIC */
+    ILepidopteristTracker getBreedingTracker(World world, String player);
 
-	/* MUTATIONS */
-	Collection<IButterflyMutation> getMutations(boolean shuffle);
+    /**
+     * Spawns the given butterfly in the world.
+     * 
+     * @param butterfly
+     * @return butterfly entity on success, null otherwise.
+     */
+    EntityLiving spawnButterflyInWorld(World world, IButterfly butterfly, double x, double y, double z);
+
+    /**
+     * @return true if passed item is mated.
+     */
+    boolean isMated(ItemStack stack);
+
+    /* TEMPLATES */
+    ArrayList<IButterfly> getIndividualTemplates();
+
+    /* MUTATIONS */
+    Collection<IButterflyMutation> getMutations(boolean shuffle);
 
 }

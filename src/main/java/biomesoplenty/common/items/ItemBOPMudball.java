@@ -5,37 +5,33 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
 import biomesoplenty.BiomesOPlenty;
 import biomesoplenty.common.entities.projectiles.EntityMudball;
 
-public class ItemBOPMudball extends Item
-{
-	public ItemBOPMudball()
-	{
-		this.setCreativeTab(BiomesOPlenty.tabBiomesOPlenty);
-	}
+public class ItemBOPMudball extends Item {
 
-	@Override
-	public void registerIcons(IIconRegister iconRegister)
-	{
-		itemIcon = iconRegister.registerIcon("biomesoplenty:mudball");
-	}
+    public ItemBOPMudball() {
+        this.setCreativeTab(BiomesOPlenty.tabBiomesOPlenty);
+    }
 
-	@Override
-	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
-	{
-		if (!player.capabilities.isCreativeMode) 
-		{
-			--itemStack.stackSize;
-		}
+    @Override
+    public void registerIcons(IIconRegister iconRegister) {
+        itemIcon = iconRegister.registerIcon("biomesoplenty:mudball");
+    }
 
-		world.playSoundAtEntity(player, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+    @Override
+    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) {
+        if (!player.capabilities.isCreativeMode) {
+            --itemStack.stackSize;
+        }
 
-		if (!world.isRemote) 
-		{
-			world.spawnEntityInWorld(new EntityMudball(world, player));
-		}
+        world.playSoundAtEntity(player, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 
-		return itemStack;
-	}
+        if (!world.isRemote) {
+            world.spawnEntityInWorld(new EntityMudball(world, player));
+        }
+
+        return itemStack;
+    }
 }

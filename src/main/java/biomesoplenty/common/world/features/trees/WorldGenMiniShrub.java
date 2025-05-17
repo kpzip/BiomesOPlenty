@@ -9,8 +9,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
-public class WorldGenMiniShrub extends WorldGenAbstractTree
-{
+public class WorldGenMiniShrub extends WorldGenAbstractTree {
+
     private Block wood;
     private Block leaves;
 
@@ -19,8 +19,7 @@ public class WorldGenMiniShrub extends WorldGenAbstractTree
 
     private List soilBlocks;
 
-    public WorldGenMiniShrub(Block wood, Block leaves, int woodMeta, int leavesMeta, Block... soilBlocks) 
-    {
+    public WorldGenMiniShrub(Block wood, Block leaves, int woodMeta, int leavesMeta, Block... soilBlocks) {
         super(false);
 
         this.wood = wood;
@@ -33,37 +32,34 @@ public class WorldGenMiniShrub extends WorldGenAbstractTree
     }
 
     @Override
-    public boolean generate(World world, Random random, int x, int y, int z)
-    {
+    public boolean generate(World world, Random random, int x, int y, int z) {
         Block block;
 
-        do
-        {
+        do {
             block = world.getBlock(x, y, z);
-            if (!(block == Blocks.netherrack || block == Blocks.bedrock || block.isAir(world, x, y, z)))
-            {
+            if (!(block == Blocks.netherrack || block == Blocks.bedrock || block.isAir(world, x, y, z))) {
                 break;
             }
             --y;
         } while (y > 0);
 
-        if (!soilBlocks.contains(block))
-        {
+        if (!soilBlocks.contains(block)) {
             return false;
-        }
-        else
-        {
-            /*for (int var7 = -2; var7 <= 2; ++var7)
-            {
-                for (int var8 = -2; var8 <= 2; ++var8)
-                {
-                    if (world.isAirBlock(x + var7, y + 1, z + var8) && world.isAirBlock(x + var7, y + 2, z + var8))
-                        return false;
-                }
-            }*/
+        } else {
+            /*
+             * for (int var7 = -2; var7 <= 2; ++var7)
+             * {
+             * for (int var8 = -2; var8 <= 2; ++var8)
+             * {
+             * if (world.isAirBlock(x + var7, y + 1, z + var8) && world.isAirBlock(x + var7, y + 2, z + var8))
+             * return false;
+             * }
+             * }
+             */
 
-            world.getBlock(x, y, z).onPlantGrow(world, x, y, z, x, y, z);
-            
+            world.getBlock(x, y, z)
+                .onPlantGrow(world, x, y, z, x, y, z);
+
             world.setBlock(x, y + 1, z, wood, woodMeta, 2);
             world.setBlock(x, y + 2, z, wood, woodMeta, 2);
             world.setBlock(x + 1, y + 2, z, leaves, leavesMeta, 2);

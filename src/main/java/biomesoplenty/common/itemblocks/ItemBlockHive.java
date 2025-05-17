@@ -4,34 +4,30 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-public class ItemBlockHive extends ItemBlock
-{
-	private static final String[] types = new String[] {"honeycomb", "hive", "honeycombempty", "honeycombfilled"};
+public class ItemBlockHive extends ItemBlock {
 
-	public ItemBlockHive(Block block)
-	{
-		super(block);
-		
-		setMaxDamage(0);
-		setHasSubtypes(true);
-	}
+    private static final String[] types = new String[] { "honeycomb", "hive", "honeycombempty", "honeycombfilled" };
 
-	@Override
-	public int getMetadata(int meta)
-	{
-		return meta & 15;
-	}
+    public ItemBlockHive(Block block) {
+        super(block);
 
-	@Override
-	public String getUnlocalizedName(ItemStack itemstack) 
-	{
-		int meta = itemstack.getItemDamage();
-		
-		if (meta < 0 || meta >= types.length) 
-		{
-			meta = 0;
-		}
+        setMaxDamage(0);
+        setHasSubtypes(true);
+    }
 
-		return super.getUnlocalizedName() + "." + types[meta];
-	}
+    @Override
+    public int getMetadata(int meta) {
+        return meta & 15;
+    }
+
+    @Override
+    public String getUnlocalizedName(ItemStack itemstack) {
+        int meta = itemstack.getItemDamage();
+
+        if (meta < 0 || meta >= types.length) {
+            meta = 0;
+        }
+
+        return super.getUnlocalizedName() + "." + types[meta];
+    }
 }

@@ -7,142 +7,135 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
+
 import biomesoplenty.BiomesOPlenty;
 
-public class BlockBOPStairs extends BlockStairs
-{
-	public static enum Category
-	{
-		SACREDOAK ("wood"), CHERRY ("wood"), DARK ("wood"), FIR ("wood"), HOLY ("wood"), MAGIC ("wood"), MANGROVE ("wood"), PALM ("wood"), REDWOOD ("wood"), WILLOW ("wood"), PINE ("wood"), HELL_BARK ("wood"), JACARANDA ("wood"), MAHOGANY ("wood"), MUD_BRICKS ("stone");
+public class BlockBOPStairs extends BlockStairs {
 
-		private final List<String> values;
-		private String type;
+    public static enum Category {
 
-		private Category(String type)
-		{
-			this.type = type;
-			values = Arrays.asList(type);
-		}
-	}
+        SACREDOAK("wood"),
+        CHERRY("wood"),
+        DARK("wood"),
+        FIR("wood"),
+        HOLY("wood"),
+        MAGIC("wood"),
+        MANGROVE("wood"),
+        PALM("wood"),
+        REDWOOD("wood"),
+        WILLOW("wood"),
+        PINE("wood"),
+        HELL_BARK("wood"),
+        JACARANDA("wood"),
+        MAHOGANY("wood"),
+        MUD_BRICKS("stone");
 
-	private static final String[] woodTypes = new String[] {"sacredoak", "cherry", "dark", "fir", "holy", "magic", "mangrove", "palm", "redwood", "willow", "pine", "hell_bark", "jacaranda", "mahogany"};
-	private static final String[] stoneTypes = new String[] {"mudbrick"};
-	private IIcon[] textures;
+        private final List<String> values;
+        private String type;
 
-	private final Category category;
+        private Category(String type) {
+            this.type = type;
+            values = Arrays.asList(type);
+        }
+    }
 
-	public BlockBOPStairs(Block model, Category cat)
-	{
-		super(model, 0);
+    private static final String[] woodTypes = new String[] { "sacredoak", "cherry", "dark", "fir", "holy", "magic",
+        "mangrove", "palm", "redwood", "willow", "pine", "hell_bark", "jacaranda", "mahogany" };
+    private static final String[] stoneTypes = new String[] { "mudbrick" };
+    private IIcon[] textures;
 
-		category = cat;
+    private final Category category;
 
-		if (isWoodCategory(category.toString())) 
-		{
-			//TODO: this.setHardness
-			this.setHardness(2.0F);
+    public BlockBOPStairs(Block model, Category cat) {
+        super(model, 0);
 
-			//TODO setStepSound(Block.soundWoodFootstep)
-			this.setStepSound(Block.soundTypeWood);
-		}
-		else 
-		{
-			//TODO: this.setHardness
-			this.setHardness(3.0F);
+        category = cat;
 
-			//TODO 	setStepSound(Block.soundStoneFootstep)
-			this.setStepSound(Block.soundTypePiston);
-		}
-		//TODO: useNeighborBrightness?
-		useNeighborBrightness = true;
+        if (isWoodCategory(category.toString())) {
+            // TODO: this.setHardness
+            this.setHardness(2.0F);
 
-		//TODO: this.setCreativeTab()
-		this.setCreativeTab(BiomesOPlenty.tabBiomesOPlenty);
-	}
+            // TODO setStepSound(Block.soundWoodFootstep)
+            this.setStepSound(Block.soundTypeWood);
+        } else {
+            // TODO: this.setHardness
+            this.setHardness(3.0F);
 
-	@Override
-	//TODO:		registerIcons()
-	public void registerBlockIcons(IIconRegister iconRegister)
-	{
-		if (isStoneCategory(category.toString()))
-		{
-			textures = new IIcon[stoneTypes.length];
+            // TODO setStepSound(Block.soundStoneFootstep)
+            this.setStepSound(Block.soundTypePiston);
+        }
+        // TODO: useNeighborBrightness?
+        useNeighborBrightness = true;
 
-			for (int i = 0; i < stoneTypes.length; ++i) {
-				textures[i] = iconRegister.registerIcon("biomesoplenty:"+stoneTypes[i]);
-			}
-		}
-		else
-		{
-			textures = new IIcon[woodTypes.length];
+        // TODO: this.setCreativeTab()
+        this.setCreativeTab(BiomesOPlenty.tabBiomesOPlenty);
+    }
 
-			for (int i = 0; i < woodTypes.length; ++i) {
-				textures[i] = iconRegister.registerIcon("biomesoplenty:plank_"+woodTypes[i]);
-			}
-		}
-	}
+    @Override
+    // TODO: registerIcons()
+    public void registerBlockIcons(IIconRegister iconRegister) {
+        if (isStoneCategory(category.toString())) {
+            textures = new IIcon[stoneTypes.length];
 
-	public boolean isWoodCategory(String block)
-	{
-		String type = Category.valueOf(block).type;
+            for (int i = 0; i < stoneTypes.length; ++i) {
+                textures[i] = iconRegister.registerIcon("biomesoplenty:" + stoneTypes[i]);
+            }
+        } else {
+            textures = new IIcon[woodTypes.length];
 
-		if (type == "wood")
-			return true;
-		else
-			return false;
-	}
+            for (int i = 0; i < woodTypes.length; ++i) {
+                textures[i] = iconRegister.registerIcon("biomesoplenty:plank_" + woodTypes[i]);
+            }
+        }
+    }
 
-	public boolean isStoneCategory(String block)
-	{
-		String type = Category.valueOf(block).type;
+    public boolean isWoodCategory(String block) {
+        String type = Category.valueOf(block).type;
 
-		if (type == "stone")
-			return true;
-		else
-			return false;
-	}
+        if (type == "wood") return true;
+        else return false;
+    }
 
-	public static int getWoodCategoryAmount()
-	{
-		int woodCatNo = 0;
+    public boolean isStoneCategory(String block) {
+        String type = Category.valueOf(block).type;
 
-		for (Category cat : Category.values())
-		{
-			if (cat.values.contains("wood"))
-			{
-				++woodCatNo;
-			}
-		}
+        if (type == "stone") return true;
+        else return false;
+    }
 
-		return woodCatNo;
-	}
+    public static int getWoodCategoryAmount() {
+        int woodCatNo = 0;
 
-	public static int getStoneCategoryAmount()
-	{
-		int woodCatNo = 0;
+        for (Category cat : Category.values()) {
+            if (cat.values.contains("wood")) {
+                ++woodCatNo;
+            }
+        }
 
-		for (Category cat : Category.values())
-		{
-			if (cat.values.contains("stone"))
-			{
-				++woodCatNo;
-			}
-		}
+        return woodCatNo;
+    }
 
-		return woodCatNo;
-	}
+    public static int getStoneCategoryAmount() {
+        int woodCatNo = 0;
 
-	@Override
-	//TODO:		 getIcon()
-	public IIcon getIcon(int side, int meta)
-	{
-		int adjCat = category.ordinal();
+        for (Category cat : Category.values()) {
+            if (cat.values.contains("stone")) {
+                ++woodCatNo;
+            }
+        }
 
-		if (isStoneCategory(category.toString()))
-		{
-			adjCat = adjCat - getWoodCategoryAmount();
-		}
+        return woodCatNo;
+    }
 
-		return textures[adjCat];
-	}
+    @Override
+    // TODO: getIcon()
+    public IIcon getIcon(int side, int meta) {
+        int adjCat = category.ordinal();
+
+        if (isStoneCategory(category.toString())) {
+            adjCat = adjCat - getWoodCategoryAmount();
+        }
+
+        return textures[adjCat];
+    }
 }

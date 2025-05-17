@@ -5,36 +5,37 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
-public class ItemBlockSapling extends ItemBlock
-{
-	private static final String[] saplings = new String[] {"apple", "yellowautumn", "bamboo", "magic", "dark", "dead", "fir", "holy", "orangeautumn", "origin", "pinkcherry", "maple", "whitecherry", "hellbark", "jacaranda", "persimmon"};
-	private static final int MAX = 15;
+public class ItemBlockSapling extends ItemBlock {
 
-	public ItemBlockSapling(Block block)
-	{
-		super(block);
-		
-		this.setMaxDamage(0);
-		this.setHasSubtypes(true);
-	}
+    private static final String[] saplings = new String[] { "apple", "yellowautumn", "bamboo", "magic", "dark", "dead",
+        "fir", "holy", "orangeautumn", "origin", "pinkcherry", "maple", "whitecherry", "hellbark", "jacaranda",
+        "persimmon" };
+    private static final int MAX = 15;
 
-	@Override
-	public int getMetadata(int meta)
-	{
-		return meta & 15;
-	}
+    public ItemBlockSapling(Block block) {
+        super(block);
 
-	@Override
-	public String getUnlocalizedName(ItemStack itemStack)
-	{
-		int meta = itemStack.getItemDamageForDisplay() > MAX ? 0 : itemStack.getItemDamageForDisplay();
-		return super.getUnlocalizedName() + "." + (new StringBuilder()).append(saplings[meta]).append("Sapling").toString();
-	}
+        this.setMaxDamage(0);
+        this.setHasSubtypes(true);
+    }
 
-	@Override
-	public IIcon getIconFromDamage(int meta)
-	{
-		//TODO:	linkedBlock   getIcon
-		return field_150939_a.getIcon(0, meta);
-	}
+    @Override
+    public int getMetadata(int meta) {
+        return meta & 15;
+    }
+
+    @Override
+    public String getUnlocalizedName(ItemStack itemStack) {
+        int meta = itemStack.getItemDamageForDisplay() > MAX ? 0 : itemStack.getItemDamageForDisplay();
+        return super.getUnlocalizedName() + "."
+            + (new StringBuilder()).append(saplings[meta])
+                .append("Sapling")
+                .toString();
+    }
+
+    @Override
+    public IIcon getIconFromDamage(int meta) {
+        // TODO: linkedBlock getIcon
+        return field_150939_a.getIcon(0, meta);
+    }
 }

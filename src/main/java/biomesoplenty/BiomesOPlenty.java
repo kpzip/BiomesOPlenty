@@ -1,6 +1,7 @@
 package biomesoplenty;
 
 import net.minecraft.creativetab.CreativeTabs;
+
 import biomesoplenty.common.configuration.BOPConfiguration;
 import biomesoplenty.common.configuration.structures.BOPConfigurationStrongholds;
 import biomesoplenty.common.configuration.structures.BOPConfigurationVillages;
@@ -29,28 +30,31 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid = BOPModInfo.modID, name = BOPModInfo.modName, version="2.0.2", dependencies = "after:Natura; required-after:Forge@[10.12.2.1147,)")
-public class BiomesOPlenty
-{
+@Mod(
+    modid = BOPModInfo.modID,
+    name = BOPModInfo.modName,
+    version = "2.0.2",
+    dependencies = "after:Natura; required-after:Forge@[10.12.2.1147,)")
+public class BiomesOPlenty {
+
     @Instance("BiomesOPlenty")
     public static BiomesOPlenty instance;
-    
+
     @SidedProxy(clientSide = "biomesoplenty.ClientProxy", serverSide = "biomesoplenty.CommonProxy")
     public static CommonProxy proxy;
-    
+
     public static CreativeTabs tabBiomesOPlenty;
     public static String configPath;
-    
+
     @EventHandler
-    public void preInit(FMLPreInitializationEvent event)
-    {
+    public void preInit(FMLPreInitializationEvent event) {
         configPath = event.getModConfigurationDirectory() + "/biomesoplenty/";
         BOPConfiguration.init(configPath);
-        
-        //Version.check();
-        
+
+        // Version.check();
+
         tabBiomesOPlenty = new CreativeTabsBOP(CreativeTabs.getNextID(), "tabBiomesOPlenty");
-        
+
         BOPPacketHandler.init();
         BOPPotions.init();
         BOPFluids.preInit();
@@ -64,27 +68,25 @@ public class BiomesOPlenty
         BOPConfigurationStrongholds.init(BOPConfiguration.strongholdsConfigFile);
         BOPEntities.init();
         BOPVanillaCompat.init();
-        
+
         BOPEventHandlers.init();
-        
+
         proxy.registerRenderers();
-        
+
         BOPIntegration.preInit();
     }
-    
+
     @EventHandler
-    public void load(FMLInitializationEvent event)
-    {
+    public void load(FMLInitializationEvent event) {
         TreecapitatorIntegration.init();
 
         BOPDimensions.init();
     }
-    
+
     @EventHandler
-    public void postInit(FMLPostInitializationEvent event)
-    {
-    	BOPIntegration.postInit();
-        
+    public void postInit(FMLPostInitializationEvent event) {
+        BOPIntegration.postInit();
+
         BOPBiomes.worldTypeBOP = new WorldTypeBOP();
     }
 }

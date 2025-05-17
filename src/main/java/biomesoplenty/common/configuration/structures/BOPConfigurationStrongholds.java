@@ -15,14 +15,13 @@ import biomesoplenty.api.content.BOPCBiomes;
 import biomesoplenty.common.world.BOPBiomeManager;
 import cpw.mods.fml.common.FMLLog;
 
-public class BOPConfigurationStrongholds
-{
-	public static Configuration config;
-	
-	public static ArrayList<Integer> enabledBiomes = new ArrayList();
-	
-	public static void addDefaultStrongholdBiomes()
-	{
+public class BOPConfigurationStrongholds {
+
+    public static Configuration config;
+
+    public static ArrayList<Integer> enabledBiomes = new ArrayList();
+
+    public static void addDefaultStrongholdBiomes() {
         addStrongholdBiome(BOPCBiomes.alps);
         addStrongholdBiome(BOPCBiomes.arctic);
         addStrongholdBiome(BOPCBiomes.bambooForest);
@@ -85,45 +84,36 @@ public class BOPConfigurationStrongholds
         addStrongholdBiome(BOPCBiomes.wasteland);
         addStrongholdBiome(BOPCBiomes.wetland);
         addStrongholdBiome(BOPCBiomes.woodland);
-	}
-	
-	public static void init(File configFile)
-	{
-		addDefaultStrongholdBiomes();
+    }
 
-		config = new Configuration(configFile);
+    public static void init(File configFile) {
+        addDefaultStrongholdBiomes();
 
-		try
-		{
-			config.load();
+        config = new Configuration(configFile);
 
-			for (List<BiomeEntry> biomeList : BOPBiomeManager.overworldBiomes)
-			{
-				for (BiomeEntry entry : biomeList)
-				{
-					BiomeGenBase biome = entry.biome;
+        try {
+            config.load();
 
-					if (config.get("Allow Strongholds", biome.biomeName, enabledBiomes.contains(biome.biomeID)).getBoolean(enabledBiomes.contains(biome.biomeID)))
-					{
-						BiomeManager.addStrongholdBiome(biome);
-					}
-				}
-			}
-		}
-		catch (Exception e)
-		{
-			FMLLog.log(Level.ERROR, "Biomes O Plenty has had a problem loading its configuration", e);
-		}
-		finally
-		{
-			if (config.hasChanged()) {
-				config.save();
-			}
-		}
-	}
-	
-	public static void addStrongholdBiome(BiomeGenBase biome)
-	{
-		if (biome != null) enabledBiomes.add(biome.biomeID);
-	}
+            for (List<BiomeEntry> biomeList : BOPBiomeManager.overworldBiomes) {
+                for (BiomeEntry entry : biomeList) {
+                    BiomeGenBase biome = entry.biome;
+
+                    if (config.get("Allow Strongholds", biome.biomeName, enabledBiomes.contains(biome.biomeID))
+                        .getBoolean(enabledBiomes.contains(biome.biomeID))) {
+                        BiomeManager.addStrongholdBiome(biome);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            FMLLog.log(Level.ERROR, "Biomes O Plenty has had a problem loading its configuration", e);
+        } finally {
+            if (config.hasChanged()) {
+                config.save();
+            }
+        }
+    }
+
+    public static void addStrongholdBiome(BiomeGenBase biome) {
+        if (biome != null) enabledBiomes.add(biome.biomeID);
+    }
 }

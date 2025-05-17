@@ -3,38 +3,39 @@ package biomesoplenty.common.items;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
+
 import biomesoplenty.BiomesOPlenty;
 import biomesoplenty.api.content.BOPCItems;
 
-public class ItemBOPSpade extends ItemSpade
-{
-	public int textureID = 0;
+public class ItemBOPSpade extends ItemSpade {
 
-	public ItemBOPSpade(ToolMaterial toolMaterial, int texture)
-	{
-		super(toolMaterial);
-		
-		this.textureID = texture;
-		
-		this.setHarvestLevel("shovel", 4);
-		
-		this.setCreativeTab(BiomesOPlenty.tabBiomesOPlenty);
-	}
+    public int textureID = 0;
 
-	@Override
-	public boolean getIsRepairable(ItemStack itemToRepair, ItemStack itemToRepairWith)
-	{
-		if (textureID == 1 && itemToRepairWith.getItem() == BOPCItems.misc && itemToRepairWith.getItemDamage() == 2)
-			return true;
-		else
-			return false;
-	}
+    public ItemBOPSpade(ToolMaterial toolMaterial, int texture) {
+        super(toolMaterial);
 
-	@Override
-	public void registerIcons(IIconRegister iconRegister)
-	{
-		if (textureID == 0){ itemIcon = iconRegister.registerIcon("biomesoplenty:mudshovel"); }
-		else if (textureID == 1){ itemIcon = iconRegister.registerIcon("biomesoplenty:amethystshovel"); }
-		else { itemIcon = iconRegister.registerIcon("biomesoplenty:mudball"); }
-	}
+        this.textureID = texture;
+
+        this.setHarvestLevel("shovel", 4);
+
+        this.setCreativeTab(BiomesOPlenty.tabBiomesOPlenty);
+    }
+
+    @Override
+    public boolean getIsRepairable(ItemStack itemToRepair, ItemStack itemToRepairWith) {
+        if (textureID == 1 && itemToRepairWith.getItem() == BOPCItems.misc && itemToRepairWith.getItemDamage() == 2)
+            return true;
+        else return false;
+    }
+
+    @Override
+    public void registerIcons(IIconRegister iconRegister) {
+        if (textureID == 0) {
+            itemIcon = iconRegister.registerIcon("biomesoplenty:mudshovel");
+        } else if (textureID == 1) {
+            itemIcon = iconRegister.registerIcon("biomesoplenty:amethystshovel");
+        } else {
+            itemIcon = iconRegister.registerIcon("biomesoplenty:mudball");
+        }
+    }
 }

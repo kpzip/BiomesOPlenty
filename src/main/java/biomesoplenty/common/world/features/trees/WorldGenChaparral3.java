@@ -7,42 +7,34 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
-public class WorldGenChaparral3 extends WorldGenAbstractTree
-{
-    public WorldGenChaparral3()
-    {
+public class WorldGenChaparral3 extends WorldGenAbstractTree {
+
+    public WorldGenChaparral3() {
         super(false);
     }
-    
+
     @Override
-    public boolean generate(World world, Random random, int x, int y, int z)
-    {
-        //TODO:        isAirBlock()
-        while (world.isAirBlock(x, y, z) && y > 2)
-        {
+    public boolean generate(World world, Random random, int x, int y, int z) {
+        // TODO: isAirBlock()
+        while (world.isAirBlock(x, y, z) && y > 2) {
             --y;
         }
 
-        //TODO:           getBlock()
+        // TODO: getBlock()
         Block block = world.getBlock(x, y, z);
 
-        if (block != Blocks.grass && block != Blocks.sand)
-        {
+        if (block != Blocks.grass && block != Blocks.sand) {
             return false;
-        }
-        else
-        {
-            for (int var7 = -2; var7 <= 2; ++var7)
-            {
-                for (int var8 = -2; var8 <= 2; ++var8)
-                {
-                    //TODO:     isAirBlock()                                    isAirBlock()
+        } else {
+            for (int var7 = -2; var7 <= 2; ++var7) {
+                for (int var8 = -2; var8 <= 2; ++var8) {
+                    // TODO: isAirBlock() isAirBlock()
                     if (world.isAirBlock(x + var7, y - 1, z + var8) && world.isAirBlock(x + var7, y - 2, z + var8))
                         return false;
                 }
             }
 
-            //TODO: setBlock()
+            // TODO: setBlock()
             world.setBlock(x, y, z, Blocks.log);
             world.setBlock(x, y + 1, z, Blocks.leaves);
             return true;

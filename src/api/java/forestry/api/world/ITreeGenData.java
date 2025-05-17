@@ -9,15 +9,15 @@ import net.minecraft.world.World;
 
 public interface ITreeGenData {
 
-	int getGirth(World world, int x, int y, int z);
+    int getGirth(World world, int x, int y, int z);
 
-	float getHeightModifier();
+    float getHeightModifier();
 
-	boolean canGrow(World world, int x, int y, int z, int expectedGirth, int expectedHeight);
+    boolean canGrow(World world, int x, int y, int z, int expectedGirth, int expectedHeight);
 
-	void setLeaves(World world, String owner, int x, int y, int z);
+    void setLeaves(World world, String owner, int x, int y, int z);
 
-	boolean allowsFruitBlocks();
+    boolean allowsFruitBlocks();
 
-	boolean trySpawnFruitBlock(World world, int x, int y, int z);
+    boolean trySpawnFruitBlock(World world, int x, int y, int z);
 }

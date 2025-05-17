@@ -15,106 +15,87 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+
 import biomesoplenty.api.content.BOPCItems;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockMud extends BOPBlock
-{
-	private static final String[] mud = new String[] { "mud", "quicksand" };
-	private IIcon[] textures;
-	
-	public BlockMud()
-	{
-		super(Material.sand);
+public class BlockMud extends BOPBlock {
 
-		this.setHardness(0.6F);
-		this.setHarvestLevel("shovel", 0);
+    private static final String[] mud = new String[] { "mud", "quicksand" };
+    private IIcon[] textures;
 
-		this.setStepSound(Block.soundTypeSand);
-	}
+    public BlockMud() {
+        super(Material.sand);
 
-	@Override
-	public void registerBlockIcons(IIconRegister iconRegister)
-	{
-		textures = new IIcon[mud.length];
+        this.setHardness(0.6F);
+        this.setHarvestLevel("shovel", 0);
 
-		for (int i = 0; i < mud.length; ++i) 
-		{
-			textures[i] = iconRegister.registerIcon("biomesoplenty:" + mud[i]);
-		}
-	}
-	
-	@Override
-	public IIcon getIcon(int side, int meta)
-	{
-		if (meta < 0 || meta >= textures.length) 
-		{
-			meta = 0;
-		}
+        this.setStepSound(Block.soundTypeSand);
+    }
 
-		return textures[meta];
-	}
-	
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item block, CreativeTabs creativeTabs, List list) 
-	{
-		for (int i = 0; i < mud.length; ++i)
-		{
-			list.add(new ItemStack(block, 1, i));
-		}
-	}
+    @Override
+    public void registerBlockIcons(IIconRegister iconRegister) {
+        textures = new IIcon[mud.length];
 
-	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
-	{
-		if (world.getBlockMetadata(x, y, z) == 0)
-		{
-			float var5 = 0.35F;
-			return AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 1 - var5, z + 1);
-		}
-		else
-			return null;
-	}
+        for (int i = 0; i < mud.length; ++i) {
+            textures[i] = iconRegister.registerIcon("biomesoplenty:" + mud[i]);
+        }
+    }
 
-	@Override
-	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
-	{
-		if (world.getBlockMetadata(x, y, z) == 0)
-		{
-			if (entity instanceof EntityPlayer)
-			{
-				InventoryPlayer inventory = ((EntityPlayer)entity).inventory;
+    @Override
+    public IIcon getIcon(int side, int meta) {
+        if (meta < 0 || meta >= textures.length) {
+            meta = 0;
+        }
 
-				if (inventory.armorInventory[0] != null && inventory.armorInventory[0].getItem() == BOPCItems.wadingBoots)
-				{
-					return;
-				}
-			}
+        return textures[meta];
+    }
 
-			entity.motionX *= 0.1D;
-			entity.motionZ *= 0.1D;
-		}
-		else
-		{
-			entity.setInWeb();
-		}
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void getSubBlocks(Item block, CreativeTabs creativeTabs, List list) {
+        for (int i = 0; i < mud.length; ++i) {
+            list.add(new ItemStack(block, 1, i));
+        }
+    }
 
-	@Override
-	public Item getItemDropped(int metadata, Random random, int fortune)
-	{
-		if (metadata == 0) return BOPCItems.mudball;
-		else return super.getItemDropped(metadata, random, fortune);
-	}
+    @Override
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
+        if (world.getBlockMetadata(x, y, z) == 0) {
+            float var5 = 0.35F;
+            return AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 1 - var5, z + 1);
+        } else return null;
+    }
 
-	@Override
-	public int quantityDropped(int meta, int fortune, Random random)
-	{
-		if (meta == 0)
-			return 4;
-		else
-			return 1;
-	}
+    @Override
+    public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
+        if (world.getBlockMetadata(x, y, z) == 0) {
+            if (entity instanceof EntityPlayer) {
+                InventoryPlayer inventory = ((EntityPlayer) entity).inventory;
+
+                if (inventory.armorInventory[0] != null
+                    && inventory.armorInventory[0].getItem() == BOPCItems.wadingBoots) {
+                    return;
+                }
+            }
+
+            entity.motionX *= 0.1D;
+            entity.motionZ *= 0.1D;
+        } else {
+            entity.setInWeb();
+        }
+    }
+
+    @Override
+    public Item getItemDropped(int metadata, Random random, int fortune) {
+        if (metadata == 0) return BOPCItems.mudball;
+        else return super.getItemDropped(metadata, random, fortune);
+    }
+
+    @Override
+    public int quantityDropped(int meta, int fortune, Random random) {
+        if (meta == 0) return 4;
+        else return 1;
+    }
 }

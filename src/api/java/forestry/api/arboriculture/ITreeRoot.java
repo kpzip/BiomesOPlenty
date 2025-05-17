@@ -18,66 +18,67 @@ import forestry.api.genetics.IIndividual;
 import forestry.api.genetics.ISpeciesRoot;
 
 public interface ITreeRoot extends ISpeciesRoot {
-	
-	boolean isMember(ItemStack itemstack);
 
-	ITree getMember(ItemStack itemstack);
+    boolean isMember(ItemStack itemstack);
 
-	ITree getMember(NBTTagCompound compound);
+    ITree getMember(ItemStack itemstack);
 
-	ITreeGenome templateAsGenome(IAllele[] template);
+    ITree getMember(NBTTagCompound compound);
 
-	ITreeGenome templateAsGenome(IAllele[] templateActive, IAllele[] templateInactive);
+    ITreeGenome templateAsGenome(IAllele[] template);
 
-	/**
-	 * @param world
-	 * @return {@link IArboristTracker} associated with the passed world.
-	 */
-	IArboristTracker getBreedingTracker(World world, String player);
+    ITreeGenome templateAsGenome(IAllele[] templateActive, IAllele[] templateInactive);
 
-	/* TREE SPECIFIC */
-	/**
-	 * Register a leaf tick handler.
-	 * @param handler the {@link ILeafTickHandler} to register.
-	 */
-	void registerLeafTickHandler(ILeafTickHandler handler);
-	
-	Collection<ILeafTickHandler> getLeafTickHandlers();
-	
-	/**
-	 * @return type of tree encoded on the itemstack. EnumBeeType.NONE if it isn't a tree.
-	 */
-	EnumGermlingType getType(ItemStack stack);
+    /**
+     * @param world
+     * @return {@link IArboristTracker} associated with the passed world.
+     */
+    IArboristTracker getBreedingTracker(World world, String player);
 
-	ITree getTree(World world, int x, int y, int z);
+    /* TREE SPECIFIC */
+    /**
+     * Register a leaf tick handler.
+     * 
+     * @param handler the {@link ILeafTickHandler} to register.
+     */
+    void registerLeafTickHandler(ILeafTickHandler handler);
 
-	ITree getTree(World world, ITreeGenome genome);
+    Collection<ILeafTickHandler> getLeafTickHandlers();
 
-	boolean plantSapling(World world, ITree tree, String owner, int x, int y, int z);
+    /**
+     * @return type of tree encoded on the itemstack. EnumBeeType.NONE if it isn't a tree.
+     */
+    EnumGermlingType getType(ItemStack stack);
 
-	boolean setLeaves(World world, IIndividual tree, String owner, int x, int y, int z);
+    ITree getTree(World world, int x, int y, int z);
 
-	IChromosome[] templateAsChromosomes(IAllele[] template);
+    ITree getTree(World world, ITreeGenome genome);
 
-	IChromosome[] templateAsChromosomes(IAllele[] templateActive, IAllele[] templateInactive);
+    boolean plantSapling(World world, ITree tree, String owner, int x, int y, int z);
 
-	boolean setFruitBlock(World world, IAlleleFruit allele, float sappiness, short[] indices, int x, int y, int z);
+    boolean setLeaves(World world, IIndividual tree, String owner, int x, int y, int z);
 
-	/* GAME MODE */
-	ArrayList<ITreekeepingMode> getTreekeepingModes();
+    IChromosome[] templateAsChromosomes(IAllele[] template);
 
-	ITreekeepingMode getTreekeepingMode(World world);
+    IChromosome[] templateAsChromosomes(IAllele[] templateActive, IAllele[] templateInactive);
 
-	ITreekeepingMode getTreekeepingMode(String name);
+    boolean setFruitBlock(World world, IAlleleFruit allele, float sappiness, short[] indices, int x, int y, int z);
 
-	void registerTreekeepingMode(ITreekeepingMode mode);
+    /* GAME MODE */
+    ArrayList<ITreekeepingMode> getTreekeepingModes();
 
-	void setTreekeepingMode(World world, String name);
-	
-	/* TEMPLATES */
-	ArrayList<ITree> getIndividualTemplates();
+    ITreekeepingMode getTreekeepingMode(World world);
 
-	/* MUTATIONS */
-	Collection<ITreeMutation> getMutations(boolean shuffle);
+    ITreekeepingMode getTreekeepingMode(String name);
+
+    void registerTreekeepingMode(ITreekeepingMode mode);
+
+    void setTreekeepingMode(World world, String name);
+
+    /* TEMPLATES */
+    ArrayList<ITree> getIndividualTemplates();
+
+    /* MUTATIONS */
+    Collection<ITreeMutation> getMutations(boolean shuffle);
 
 }

@@ -7,76 +7,67 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+
 import biomesoplenty.BiomesOPlenty;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemBOPMisc extends Item
-{
-	private static String[] items = {"mudbrick", "ash", "emptyhoneycomb", "fleshchunk", "crystalshard", "bluedye", "browndye", "greendye", "whitedye", "blackdye", "ghastlysoul", "pixiedust", "ichor"};
-	@SideOnly(Side.CLIENT)
-	private IIcon[] textures;
+public class ItemBOPMisc extends Item {
 
-	public ItemBOPMisc()
-	{
-		this.setMaxDamage(0);
-		
-		this.setHasSubtypes(true);
-		this.setCreativeTab(BiomesOPlenty.tabBiomesOPlenty);
-	}
+    private static String[] items = { "mudbrick", "ash", "emptyhoneycomb", "fleshchunk", "crystalshard", "bluedye",
+        "browndye", "greendye", "whitedye", "blackdye", "ghastlysoul", "pixiedust", "ichor" };
+    @SideOnly(Side.CLIENT)
+    private IIcon[] textures;
 
-	@Override
-	public void registerIcons(IIconRegister iconRegister)
-	{
-		textures = new IIcon[items.length];
+    public ItemBOPMisc() {
+        this.setMaxDamage(0);
 
-		for (int i = 0; i < items.length; ++i) 
-		{
-			textures[i] = iconRegister.registerIcon("biomesoplenty:"+items[i]);
-		}
-	}
+        this.setHasSubtypes(true);
+        this.setCreativeTab(BiomesOPlenty.tabBiomesOPlenty);
+    }
 
-	@Override
-	public String getUnlocalizedName(ItemStack itemStack)
-	{
-		int meta = itemStack.getItemDamage();
-		if (meta < 0 || meta >= items.length) 
-		{
-			meta = 0;
-		}
+    @Override
+    public void registerIcons(IIconRegister iconRegister) {
+        textures = new IIcon[items.length];
 
-		return super.getUnlocalizedName() + "." + items[meta];
-	}
+        for (int i = 0; i < items.length; ++i) {
+            textures[i] = iconRegister.registerIcon("biomesoplenty:" + items[i]);
+        }
+    }
 
-	@Override
-	public IIcon getIconFromDamage(int meta)
-	{
-		if (meta < 0 || meta >= textures.length) 
-		{
-			meta = 0;
-		}
+    @Override
+    public String getUnlocalizedName(ItemStack itemStack) {
+        int meta = itemStack.getItemDamage();
+        if (meta < 0 || meta >= items.length) {
+            meta = 0;
+        }
 
-		return textures[meta];
-	}
-	
-	@Override
-    public int getItemStackLimit(ItemStack itemStack)
-    {
-    	if (itemStack.getItemDamage() == 10)
-    	{
-    		return 1;
-    	}
-    	
+        return super.getUnlocalizedName() + "." + items[meta];
+    }
+
+    @Override
+    public IIcon getIconFromDamage(int meta) {
+        if (meta < 0 || meta >= textures.length) {
+            meta = 0;
+        }
+
+        return textures[meta];
+    }
+
+    @Override
+    public int getItemStackLimit(ItemStack itemStack) {
+        if (itemStack.getItemDamage() == 10) {
+            return 1;
+        }
+
         return 64;
     }
 
-	@Override
-    //TODO: public void getSubItems(Item item, CreativeTabs creativeTabs, List list)
-    public void getSubItems(Item item, CreativeTabs creativeTabs, List list)
-	{
-		for(int meta = 0; meta < items.length; ++meta) 
-		{
-			list.add(new ItemStack(item, 1, meta));
-		}
-	}
+    @Override
+    // TODO: public void getSubItems(Item item, CreativeTabs creativeTabs, List list)
+    public void getSubItems(Item item, CreativeTabs creativeTabs, List list) {
+        for (int meta = 0; meta < items.length; ++meta) {
+            list.add(new ItemStack(item, 1, meta));
+        }
+    }
 }

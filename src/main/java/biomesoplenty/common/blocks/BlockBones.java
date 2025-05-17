@@ -12,251 +12,233 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
 import biomesoplenty.BiomesOPlenty;
 import biomesoplenty.client.render.RenderUtils;
 
-public class BlockBones extends Block 
-{
-	//Meta 3 & 4 used by alternate small bone rotations, 5 & 6 are used by alternate medium bone rotations
-	private static final String[] boneTypes = new String[] {"bones_small", "bones_medium", "bones_large"};
-	private IIcon[] textures;
+public class BlockBones extends Block {
 
-	public BlockBones()
-	{
-		//TODO: Material.rock
-		super(Material.rock);
-		
-		//TODO: this.setHardness
-		this.setHardness(3.0F);
-		
-		//TODO: this.setResistance
-		this.setResistance(5.0F);
-		
-		//TODO: this.setCreativeTab()
-		this.setCreativeTab(BiomesOPlenty.tabBiomesOPlenty);
-	}
+    // Meta 3 & 4 used by alternate small bone rotations, 5 & 6 are used by alternate medium bone rotations
+    private static final String[] boneTypes = new String[] { "bones_small", "bones_medium", "bones_large" };
+    private IIcon[] textures;
 
-	@Override
-	//TODO:		registerIcons()
-	public void registerBlockIcons(IIconRegister iconRegister)
-	{
-		textures = new IIcon[boneTypes.length];
+    public BlockBones() {
+        // TODO: Material.rock
+        super(Material.rock);
 
-		for (int i = 0; i < boneTypes.length; ++i) 
-		{
-			textures[i] = iconRegister.registerIcon("biomesoplenty:"+boneTypes[i]);
-		}
-	}
+        // TODO: this.setHardness
+        this.setHardness(3.0F);
 
-	@Override
-	//TODO:		 getIcon()
-	public IIcon getIcon(int side, int meta)
-	{
-		if (meta < 0 || meta >= textures.length) {
-			meta = 0;
-		}
+        // TODO: this.setResistance
+        this.setResistance(5.0F);
 
-		if (meta == 4 || meta == 5) {
-			meta = 1;
-		}
+        // TODO: this.setCreativeTab()
+        this.setCreativeTab(BiomesOPlenty.tabBiomesOPlenty);
+    }
 
-		return textures[meta];
-	}
+    @Override
+    // TODO: registerIcons()
+    public void registerBlockIcons(IIconRegister iconRegister) {
+        textures = new IIcon[boneTypes.length];
 
-	@Override
-	//TODO: getCollisionBoundingBoxFromPool
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
-	{
-		int meta = world.getBlockMetadata(x, y, z);
+        for (int i = 0; i < boneTypes.length; ++i) {
+            textures[i] = iconRegister.registerIcon("biomesoplenty:" + boneTypes[i]);
+        }
+    }
 
-		switch (meta)
-		{
-		case 0:
-			return AxisAlignedBB.getBoundingBox(x + 0.374D, y, z + 0.374D, x + 0.626D, y + 1.0D, z + 0.626D);
+    @Override
+    // TODO: getIcon()
+    public IIcon getIcon(int side, int meta) {
+        if (meta < 0 || meta >= textures.length) {
+            meta = 0;
+        }
 
-		case 1:
-			return AxisAlignedBB.getBoundingBox(x + 0.187D, y, z + 0.187D, x + 0.813D, y + 1.0D, z + 0.813D);
+        if (meta == 4 || meta == 5) {
+            meta = 1;
+        }
 
-		case 3:
-			return AxisAlignedBB.getBoundingBox(x + 0.374D, y + 0.374D, z, x + 0.626D, y + 0.626D, z + 1.00D);
+        return textures[meta];
+    }
 
-		case 4:
-			return AxisAlignedBB.getBoundingBox(x, y + 0.374D, z + 0.374D, x + 1.00D, y + 0.626D, z + 0.626D);
+    @Override
+    // TODO: getCollisionBoundingBoxFromPool
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
+        int meta = world.getBlockMetadata(x, y, z);
 
-		case 5:
-			return AxisAlignedBB.getBoundingBox(x + 0.187D, y + 0.187D, z, x + 0.813D, y + 0.813D, z + 1.00D);
+        switch (meta) {
+            case 0:
+                return AxisAlignedBB.getBoundingBox(x + 0.374D, y, z + 0.374D, x + 0.626D, y + 1.0D, z + 0.626D);
 
-		case 6:
-			return AxisAlignedBB.getBoundingBox(x, y + 0.187D, z + 0.187D, x + 1.00D, y + 0.813D, z + 0.813D);
+            case 1:
+                return AxisAlignedBB.getBoundingBox(x + 0.187D, y, z + 0.187D, x + 0.813D, y + 1.0D, z + 0.813D);
 
-		default:
-			return AxisAlignedBB.getBoundingBox(x, y, z, x + 1.0D, y + 1.0D, z + 1.0D);
-		}
-	}
+            case 3:
+                return AxisAlignedBB.getBoundingBox(x + 0.374D, y + 0.374D, z, x + 0.626D, y + 0.626D, z + 1.00D);
 
-	@Override
-	//TODO:				 getSelectedBoundingBoxFromPool()
-	public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z)
-	{
-		int meta = world.getBlockMetadata(x, y, z);
+            case 4:
+                return AxisAlignedBB.getBoundingBox(x, y + 0.374D, z + 0.374D, x + 1.00D, y + 0.626D, z + 0.626D);
 
-		switch (meta)
-		{
-		case 0:
-			return AxisAlignedBB.getBoundingBox(x + 0.374D, y, z + 0.374D, x + 0.626D, y + 1.0D, z + 0.626D);
+            case 5:
+                return AxisAlignedBB.getBoundingBox(x + 0.187D, y + 0.187D, z, x + 0.813D, y + 0.813D, z + 1.00D);
 
-		case 1:
-			return AxisAlignedBB.getBoundingBox(x + 0.187D, y, z + 0.187D, x + 0.813D, y + 1.0D, z + 0.813D);
+            case 6:
+                return AxisAlignedBB.getBoundingBox(x, y + 0.187D, z + 0.187D, x + 1.00D, y + 0.813D, z + 0.813D);
 
-		case 3:
-			return AxisAlignedBB.getBoundingBox(x + 0.374D, y + 0.374D, z, x + 0.626D, y + 0.626D, z + 1.00D);
+            default:
+                return AxisAlignedBB.getBoundingBox(x, y, z, x + 1.0D, y + 1.0D, z + 1.0D);
+        }
+    }
 
-		case 4:
-			return AxisAlignedBB.getBoundingBox(x, y + 0.374D, z + 0.374D, x + 1.00D, y + 0.626D, z + 0.626D);
+    @Override
+    // TODO: getSelectedBoundingBoxFromPool()
+    public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z) {
+        int meta = world.getBlockMetadata(x, y, z);
 
-		case 5:
-			return AxisAlignedBB.getBoundingBox(x + 0.187D, y + 0.187D, z, x + 0.813D, y + 0.813D, z + 1.00D);
+        switch (meta) {
+            case 0:
+                return AxisAlignedBB.getBoundingBox(x + 0.374D, y, z + 0.374D, x + 0.626D, y + 1.0D, z + 0.626D);
 
-		case 6:
-			return AxisAlignedBB.getBoundingBox(x, y + 0.187D, z + 0.187D, x + 1.00D, y + 0.813D, z + 0.813D);
+            case 1:
+                return AxisAlignedBB.getBoundingBox(x + 0.187D, y, z + 0.187D, x + 0.813D, y + 1.0D, z + 0.813D);
 
-		default:
-			return AxisAlignedBB.getBoundingBox(x, y, z, x + 1.0D, y + 1.0D, z + 1.0D);
-		}
-	}
+            case 3:
+                return AxisAlignedBB.getBoundingBox(x + 0.374D, y + 0.374D, z, x + 0.626D, y + 0.626D, z + 1.00D);
 
-	@Override
-	//TODO:     setBlockBoundsBasedOnState()
-	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z)
-	{
-		int meta = world.getBlockMetadata(x, y, z);
+            case 4:
+                return AxisAlignedBB.getBoundingBox(x, y + 0.374D, z + 0.374D, x + 1.00D, y + 0.626D, z + 0.626D);
 
-		float minX;
-		float minY;
-		float minZ;
-		float maxX;
-		float maxY;
-		float maxZ;
+            case 5:
+                return AxisAlignedBB.getBoundingBox(x + 0.187D, y + 0.187D, z, x + 0.813D, y + 0.813D, z + 1.00D);
 
-		switch (meta)
-		{
-		case 0:
-			minY = 0F;
-			minX = minZ = 0.374F;
-			maxX = maxZ = 0.626F;
-			maxY = 1.0F;
-			break;
+            case 6:
+                return AxisAlignedBB.getBoundingBox(x, y + 0.187D, z + 0.187D, x + 1.00D, y + 0.813D, z + 0.813D);
 
-		case 1:
-			minY = 0F;
-			minX = minZ = 0.187F;
-			maxX = maxZ = 0.813F;
-			maxY = 1.00F;
-			break;
+            default:
+                return AxisAlignedBB.getBoundingBox(x, y, z, x + 1.0D, y + 1.0D, z + 1.0D);
+        }
+    }
 
-		case 3:
-			minX = minY = 0.374F;
-			minZ = 0F;
-			maxX = maxY = 0.626F;
-			maxZ = 1.00F;
-			break;
+    @Override
+    // TODO: setBlockBoundsBasedOnState()
+    public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
+        int meta = world.getBlockMetadata(x, y, z);
 
-		case 4:
-			minX = 0F;
-			minY = minZ = 0.374F;
-			maxX = 1.00F;
-			maxY = maxZ = 0.626F;
-			break;
+        float minX;
+        float minY;
+        float minZ;
+        float maxX;
+        float maxY;
+        float maxZ;
 
-		case 5:
-			minX = minY = 0.187F;
-			minZ = 0F;
-			maxX = maxY = 0.813F;
-			maxZ = 1.00F;
-			break;
+        switch (meta) {
+            case 0:
+                minY = 0F;
+                minX = minZ = 0.374F;
+                maxX = maxZ = 0.626F;
+                maxY = 1.0F;
+                break;
 
-		case 6:
-			minX = 0F;
-			minY = minZ = 0.187F;
-			maxX = 1.00F;
-			maxY = maxZ = 0.813F;
-			break;
+            case 1:
+                minY = 0F;
+                minX = minZ = 0.187F;
+                maxX = maxZ = 0.813F;
+                maxY = 1.00F;
+                break;
 
-		default:
-			minY = 0F;
-			minX = minZ = 0.0F;
-			maxX = maxZ = 1.0F;
-			maxY = 1.0F;
-			break;
-		}
+            case 3:
+                minX = minY = 0.374F;
+                minZ = 0F;
+                maxX = maxY = 0.626F;
+                maxZ = 1.00F;
+                break;
 
-		//TODO: this.setBlockBounds()
-		this.setBlockBounds(minX, minY, minZ, maxX, maxY, maxZ);
-	}
+            case 4:
+                minX = 0F;
+                minY = minZ = 0.374F;
+                maxX = 1.00F;
+                maxY = maxZ = 0.626F;
+                break;
 
-	@Override
-	//TODO:	   getDamageValue()
-	public int getDamageValue(World world, int x, int y, int z) 
-	{
-		int meta = world.getBlockMetadata(x, y, z);
-		if (meta == 3 || meta == 4) {
-			meta = 0;
-		}
-		if (meta == 5 || meta == 6) {
-			meta = 1;
-		}
-		return meta;
-	}
+            case 5:
+                minX = minY = 0.187F;
+                minZ = 0F;
+                maxX = maxY = 0.813F;
+                maxZ = 1.00F;
+                break;
 
-	@Override
-	//TODO:		getSubBlocks()
-	public void getSubBlocks(Item block, CreativeTabs creativeTabs, List list) 
-	{
-		for (int i = 0; i < boneTypes.length; ++i) {
-			list.add(new ItemStack(block, 1, i));
-		}
-	}
+            case 6:
+                minX = 0F;
+                minY = minZ = 0.187F;
+                maxX = 1.00F;
+                maxY = maxZ = 0.813F;
+                break;
 
-	@Override
-	//TODO:		   isOpaqueCube()
-	public boolean isOpaqueCube()
-	{
-		return false;
-	}
+            default:
+                minY = 0F;
+                minX = minZ = 0.0F;
+                maxX = maxZ = 1.0F;
+                maxY = 1.0F;
+                break;
+        }
 
-	@Override
-	//TODO:		   renderAsNormalBlock()
-    public boolean renderAsNormalBlock()
-    {
+        // TODO: this.setBlockBounds()
+        this.setBlockBounds(minX, minY, minZ, maxX, maxY, maxZ);
+    }
+
+    @Override
+    // TODO: getDamageValue()
+    public int getDamageValue(World world, int x, int y, int z) {
+        int meta = world.getBlockMetadata(x, y, z);
+        if (meta == 3 || meta == 4) {
+            meta = 0;
+        }
+        if (meta == 5 || meta == 6) {
+            meta = 1;
+        }
+        return meta;
+    }
+
+    @Override
+    // TODO: getSubBlocks()
+    public void getSubBlocks(Item block, CreativeTabs creativeTabs, List list) {
+        for (int i = 0; i < boneTypes.length; ++i) {
+            list.add(new ItemStack(block, 1, i));
+        }
+    }
+
+    @Override
+    // TODO: isOpaqueCube()
+    public boolean isOpaqueCube() {
         return false;
     }
 
-	@Override
-	//TODO		getRenderType()
-	public int getRenderType()
-	{
-		return RenderUtils.bonesModel;
-	}
+    @Override
+    // TODO: renderAsNormalBlock()
+    public boolean renderAsNormalBlock() {
+        return false;
+    }
 
-	@Override
-	//TODO			shouldSideBeRendered
-    public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side)
-	{
-		return true;
-	}
+    @Override
+    // TODO getRenderType()
+    public int getRenderType() {
+        return RenderUtils.bonesModel;
+    }
 
-	@Override
-	//TODO     damageDropped()
-	public int damageDropped(int meta)
-	{
-		if (meta == 3 || meta == 4) 
-		{
-			meta = 0;
-		}
-		if (meta == 5 || meta == 6) 
-		{
-			meta = 1;
-		}
-		return meta;
-	}
+    @Override
+    // TODO shouldSideBeRendered
+    public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side) {
+        return true;
+    }
+
+    @Override
+    // TODO damageDropped()
+    public int damageDropped(int meta) {
+        if (meta == 3 || meta == 4) {
+            meta = 0;
+        }
+        if (meta == 5 || meta == 6) {
+            meta = 1;
+        }
+        return meta;
+    }
 }

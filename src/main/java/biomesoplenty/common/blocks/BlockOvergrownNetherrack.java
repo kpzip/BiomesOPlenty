@@ -11,53 +11,50 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
+
 import biomesoplenty.BiomesOPlenty;
 
-public class BlockOvergrownNetherrack extends Block
-{
-	private IIcon[] icons = new IIcon[6];
+public class BlockOvergrownNetherrack extends Block {
 
-	public BlockOvergrownNetherrack()
-	{
-		super(Material.rock);
-		
-		this.setHardness(0.4F);
-		
-		this.setStepSound(Block.soundTypeGrass);
-		
-		this.setTickRandomly(true);
-		
-		this.setCreativeTab(BiomesOPlenty.tabBiomesOPlenty);
-	}
+    private IIcon[] icons = new IIcon[6];
 
-	@Override
-	public void registerBlockIcons(IIconRegister iconRegister)
-	{
-		this.icons[0] = iconRegister.registerIcon("biomesoplenty:overgrownnetherrack3");
-		this.icons[1] = iconRegister.registerIcon("biomesoplenty:overgrownnetherrack1");
-		this.icons[2] = iconRegister.registerIcon("biomesoplenty:overgrownnetherrack2");
-		this.icons[3] = iconRegister.registerIcon("biomesoplenty:overgrownnetherrack2");
-		this.icons[4] = iconRegister.registerIcon("biomesoplenty:overgrownnetherrack2");
-		this.icons[5] = iconRegister.registerIcon("biomesoplenty:overgrownnetherrack2");
-	}
+    public BlockOvergrownNetherrack() {
+        super(Material.rock);
 
-	@Override
-	public IIcon getIcon(int side, int meta)
-	{
-	    if (side < 0 || side >= this.icons.length) side = 1;
-        
-		return this.icons[side];
-	}
+        this.setHardness(0.4F);
 
-	@Override
-	public boolean canSustainPlant(IBlockAccess world, int x, int y, int z, ForgeDirection direction, IPlantable plant)
-	{
-		return true;
-	}
+        this.setStepSound(Block.soundTypeGrass);
 
-	@Override
-	public Item getItemDropped(int metadata, Random random, int fortune)
-	{
-		return Blocks.netherrack.getItemDropped(0, random, fortune);
-	}
+        this.setTickRandomly(true);
+
+        this.setCreativeTab(BiomesOPlenty.tabBiomesOPlenty);
+    }
+
+    @Override
+    public void registerBlockIcons(IIconRegister iconRegister) {
+        this.icons[0] = iconRegister.registerIcon("biomesoplenty:overgrownnetherrack3");
+        this.icons[1] = iconRegister.registerIcon("biomesoplenty:overgrownnetherrack1");
+        this.icons[2] = iconRegister.registerIcon("biomesoplenty:overgrownnetherrack2");
+        this.icons[3] = iconRegister.registerIcon("biomesoplenty:overgrownnetherrack2");
+        this.icons[4] = iconRegister.registerIcon("biomesoplenty:overgrownnetherrack2");
+        this.icons[5] = iconRegister.registerIcon("biomesoplenty:overgrownnetherrack2");
+    }
+
+    @Override
+    public IIcon getIcon(int side, int meta) {
+        if (side < 0 || side >= this.icons.length) side = 1;
+
+        return this.icons[side];
+    }
+
+    @Override
+    public boolean canSustainPlant(IBlockAccess world, int x, int y, int z, ForgeDirection direction,
+        IPlantable plant) {
+        return true;
+    }
+
+    @Override
+    public Item getItemDropped(int metadata, Random random, int fortune) {
+        return Blocks.netherrack.getItemDropped(0, random, fortune);
+    }
 }

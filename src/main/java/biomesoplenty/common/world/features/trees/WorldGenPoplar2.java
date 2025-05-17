@@ -7,38 +7,30 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
-public class WorldGenPoplar2 extends WorldGenAbstractTree
-{
-    public WorldGenPoplar2()
-    {
+public class WorldGenPoplar2 extends WorldGenAbstractTree {
+
+    public WorldGenPoplar2() {
         super(false);
     }
 
     @Override
-    public boolean generate(World world, Random random, int x, int y, int z)
-    {
-        //TODO:     isAirBlock()
-        while (world.isAirBlock(x, y, z) && y > 2)
-        {
+    public boolean generate(World world, Random random, int x, int y, int z) {
+        // TODO: isAirBlock()
+        while (world.isAirBlock(x, y, z) && y > 2) {
             --y;
         }
 
-        //TODO:           getBlock()
+        // TODO: getBlock()
         Block block = world.getBlock(x, y, z);
 
-        if (block != Blocks.grass)
-        {
+        if (block != Blocks.grass) {
             return false;
-        }
-        else
-        {
-            for (int var7 = -2; var7 <= 2; ++var7)
-            {
-                for (int var8 = -2; var8 <= 2; ++var8)
-                {
-                    //TODO:  isAirBlock()                                   isAirBlock()                                            isAirBlock()
-                    if (world.isAirBlock(x + var7, y - 1, z + var8) && world.isAirBlock(x + var7, y - 2, z + var8) && !world.isAirBlock(x + var7, y, z + var8))
-                        return false;
+        } else {
+            for (int var7 = -2; var7 <= 2; ++var7) {
+                for (int var8 = -2; var8 <= 2; ++var8) {
+                    // TODO: isAirBlock() isAirBlock() isAirBlock()
+                    if (world.isAirBlock(x + var7, y - 1, z + var8) && world.isAirBlock(x + var7, y - 2, z + var8)
+                        && !world.isAirBlock(x + var7, y, z + var8)) return false;
                 }
             }
 

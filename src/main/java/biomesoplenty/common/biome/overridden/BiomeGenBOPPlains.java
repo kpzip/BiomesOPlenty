@@ -2,17 +2,17 @@ package biomesoplenty.common.biome.overridden;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.BiomeGenBase;
+
 import biomesoplenty.api.content.BOPCBlocks;
 import biomesoplenty.common.biome.BOPInheritedOverworldBiome;
 import biomesoplenty.common.world.features.WorldGenBOPFlora;
 import biomesoplenty.common.world.features.WorldGenBOPTallGrass;
 
-public class BiomeGenBOPPlains extends BOPInheritedOverworldBiome
-{
-	public BiomeGenBOPPlains(int biomeID, BiomeGenBase inheritedBiome) 
-	{
-		super(biomeID, inheritedBiome);
-		
+public class BiomeGenBOPPlains extends BOPInheritedOverworldBiome {
+
+    public BiomeGenBOPPlains(int biomeID, BiomeGenBase inheritedBiome) {
+        super(biomeID, inheritedBiome);
+
         this.theBiomeDecorator.bopFeatures.bopFlowersPerChunk = 8;
         this.theBiomeDecorator.bopFeatures.bopGrassPerChunk = 5;
 
@@ -24,5 +24,5 @@ public class BiomeGenBOPPlains extends BOPInheritedOverworldBiome
         this.theBiomeDecorator.bopFeatures.weightedGrassGen.put(new WorldGenBOPTallGrass(BOPCBlocks.foliage, 2), 0.5D);
         this.theBiomeDecorator.bopFeatures.weightedGrassGen.put(new WorldGenBOPTallGrass(BOPCBlocks.foliage, 10), 0.5D);
         this.theBiomeDecorator.bopFeatures.weightedGrassGen.put(new WorldGenBOPTallGrass(BOPCBlocks.foliage, 11), 0.5D);
-	}
+    }
 }

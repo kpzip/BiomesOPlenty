@@ -12,139 +12,126 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
 import biomesoplenty.BiomesOPlenty;
 import biomesoplenty.common.blocks.templates.BOPBlockWorldDecor;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockStoneFormations extends BOPBlockWorldDecor
-{
-	private static final String[] forms = new String[] {"stalagmite", "stalactite"};
-	private IIcon[] textures;
+public class BlockStoneFormations extends BOPBlockWorldDecor {
 
-	public BlockStoneFormations()
-	{
-		//TODO:	Material.vine
+    private static final String[] forms = new String[] { "stalagmite", "stalactite" };
+    private IIcon[] textures;
+
+    public BlockStoneFormations() {
+        // TODO: Material.vine
         super(Material.vine);
 
-		//TODO: this.setHardness
-		this.setHardness(0.5F);
-        
-		//TODO setStepSound(Block.soundStoneFootstep)
-		this.setStepSound(Block.soundTypePiston);
-        
-		//TODO: setTickRandomly()
-		this.setTickRandomly(true);
-		float var4 = 0.2F;
-		//TODO: setBlockBounds
-		this.setBlockBounds(0.5F - var4, 0.0F, 0.5F - var4, 0.5F + var4, var4 * 3.0F, 0.5F + var4);
+        // TODO: this.setHardness
+        this.setHardness(0.5F);
 
-		//TODO: this.setCreativeTab()
-		this.setCreativeTab(BiomesOPlenty.tabBiomesOPlenty);
-	}
+        // TODO setStepSound(Block.soundStoneFootstep)
+        this.setStepSound(Block.soundTypePiston);
 
-	@Override
-	//TODO:		registerIcons()
-	public void registerBlockIcons(IIconRegister iconRegister)
-	{
-		textures = new IIcon[forms.length];
+        // TODO: setTickRandomly()
+        this.setTickRandomly(true);
+        float var4 = 0.2F;
+        // TODO: setBlockBounds
+        this.setBlockBounds(0.5F - var4, 0.0F, 0.5F - var4, 0.5F + var4, var4 * 3.0F, 0.5F + var4);
 
-		for (int i = 0; i < forms.length; ++i) {
-			textures[i] = iconRegister.registerIcon("biomesoplenty:" + forms[i]);
-		}
-	}
+        // TODO: this.setCreativeTab()
+        this.setCreativeTab(BiomesOPlenty.tabBiomesOPlenty);
+    }
 
-	@Override
-	//TODO:		 getIcon()
-	public IIcon getIcon(int side, int meta)
-	{
-		if (meta < 0 || meta >= textures.length) {
-			meta = 0;
-		}
+    @Override
+    // TODO: registerIcons()
+    public void registerBlockIcons(IIconRegister iconRegister) {
+        textures = new IIcon[forms.length];
 
-		return textures[meta];
-	}
+        for (int i = 0; i < forms.length; ++i) {
+            textures[i] = iconRegister.registerIcon("biomesoplenty:" + forms[i]);
+        }
+    }
 
-	@Override
-	//TODO		getRenderType()
-	public int getRenderType()
-	{
-		return 1;
-	}
+    @Override
+    // TODO: getIcon()
+    public IIcon getIcon(int side, int meta) {
+        if (meta < 0 || meta >= textures.length) {
+            meta = 0;
+        }
 
-	@Override
-	//TODO:     setBlockBoundsBasedOnState()
-	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z)
-	{
-		int meta = world.getBlockMetadata(x, y, z);
+        return textures[meta];
+    }
 
-		switch (meta)
-		{
-		default:
-					//TODO: setBlockBounds
-		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
-			break;
-		}
-	}
+    @Override
+    // TODO getRenderType()
+    public int getRenderType() {
+        return 1;
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	//TODO:		getSubBlocks()
-	public void getSubBlocks(Item block, CreativeTabs creativeTabs, List list) 
-	{
-		for (int i = 0; i < forms.length; ++i)
-		{
-			list.add(new ItemStack(block, 1, i));
-		}
-	}
-	
-	public boolean isValidPosition(World world, int x, int y, int z, int metadata)
-	{
-		//TODO:					  getBlock()
-		Block blockBottom = world.getBlock(x, y - 1, z);
-		//TODO:				   getBlock()
-		Block blockTop = world.getBlock(x, y + 1, z);
-		
-		switch (metadata)
-		{
-		case 0: // Stalagmite
-			return blockBottom instanceof BlockStone;
-			
-		case 1: // Stalactite
-		    return blockTop instanceof BlockStone;
+    @Override
+    // TODO: setBlockBoundsBasedOnState()
+    public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
+        int meta = world.getBlockMetadata(x, y, z);
 
-		default:
-		    return blockBottom instanceof BlockStone;
-		}
-	}
+        switch (meta) {
+            default:
+                // TODO: setBlockBounds
+                this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+                break;
+        }
+    }
 
-	@Override
-	//TODO:			canReplace()
-    public boolean canReplace(World world, int x, int y, int z, int side, ItemStack itemStack)
-	{
-		return isValidPosition(world, x, y, z, itemStack.getItemDamage());
-	}
-	
-	@Override
-	//TODO:	   getDamageValue()
-	public int getDamageValue(World world, int x, int y, int z) 
-	{
-		int meta = world.getBlockMetadata(x, y, z);
+    @Override
+    @SideOnly(Side.CLIENT)
+    // TODO: getSubBlocks()
+    public void getSubBlocks(Item block, CreativeTabs creativeTabs, List list) {
+        for (int i = 0; i < forms.length; ++i) {
+            list.add(new ItemStack(block, 1, i));
+        }
+    }
 
-		return meta;
-	}
+    public boolean isValidPosition(World world, int x, int y, int z, int metadata) {
+        // TODO: getBlock()
+        Block blockBottom = world.getBlock(x, y - 1, z);
+        // TODO: getBlock()
+        Block blockTop = world.getBlock(x, y + 1, z);
 
-	@Override
-	//TODO     damageDropped()
-	public int damageDropped(int meta)
-	{
-		return meta & 15;
-	}
+        switch (metadata) {
+            case 0: // Stalagmite
+                return blockBottom instanceof BlockStone;
 
-	@Override
-	//TODO: 	   isBlockReplaceable
-	public boolean canPlaceBlockAt(World world, int x, int y, int z)
-	{
-		return true;
-	}
+            case 1: // Stalactite
+                return blockTop instanceof BlockStone;
+
+            default:
+                return blockBottom instanceof BlockStone;
+        }
+    }
+
+    @Override
+    // TODO: canReplace()
+    public boolean canReplace(World world, int x, int y, int z, int side, ItemStack itemStack) {
+        return isValidPosition(world, x, y, z, itemStack.getItemDamage());
+    }
+
+    @Override
+    // TODO: getDamageValue()
+    public int getDamageValue(World world, int x, int y, int z) {
+        int meta = world.getBlockMetadata(x, y, z);
+
+        return meta;
+    }
+
+    @Override
+    // TODO damageDropped()
+    public int damageDropped(int meta) {
+        return meta & 15;
+    }
+
+    @Override
+    // TODO: isBlockReplaceable
+    public boolean canPlaceBlockAt(World world, int x, int y, int z) {
+        return true;
+    }
 }

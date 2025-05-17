@@ -5,22 +5,19 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.IIcon;
 
-public class ItemBlockBamboo extends ItemBlock
-{
-	public ItemBlockBamboo(Block block)
-	{
-		super(block);
-	}
+public class ItemBlockBamboo extends ItemBlock {
 
-	@Override
-	public void registerIcons(IIconRegister iconRegister)
-	{
-		itemIcon = iconRegister.registerIcon("biomesoplenty:item_bamboo");
-	}
+    public ItemBlockBamboo(Block block) {
+        super(block);
+    }
 
-	@Override
-	public IIcon getIconFromDamage(int meta)
-	{
-		return itemIcon;
-	}
+    @Override
+    public void registerIcons(IIconRegister iconRegister) {
+        itemIcon = iconRegister.registerIcon("biomesoplenty:item_bamboo");
+    }
+
+    @Override
+    public IIcon getIconFromDamage(int meta) {
+        return itemIcon;
+    }
 }

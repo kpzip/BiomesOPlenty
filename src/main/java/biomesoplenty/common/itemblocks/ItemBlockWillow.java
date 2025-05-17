@@ -5,36 +5,33 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.ItemColored;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+
 import biomesoplenty.api.content.BOPCBlocks;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemBlockWillow extends ItemColored
-{
-	@SideOnly(Side.CLIENT)
-	private IIcon texture;
+public class ItemBlockWillow extends ItemColored {
 
-	public ItemBlockWillow(Block block)
-	{
-		super(block, false);
-	}
+    @SideOnly(Side.CLIENT)
+    private IIcon texture;
 
-	@Override
-	public void registerIcons(IIconRegister iconRegister)
-	{
-		texture = iconRegister.registerIcon("biomesoplenty:willow");
-	}
+    public ItemBlockWillow(Block block) {
+        super(block, false);
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public int getColorFromItemStack(ItemStack itemStack, int par2)
-	{
-		return BOPCBlocks.willow.getRenderColor(itemStack.getItemDamage());
-	}
+    @Override
+    public void registerIcons(IIconRegister iconRegister) {
+        texture = iconRegister.registerIcon("biomesoplenty:willow");
+    }
 
-	@Override
-	public IIcon getIconFromDamage(int meta)
-	{
-		return texture;
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public int getColorFromItemStack(ItemStack itemStack, int par2) {
+        return BOPCBlocks.willow.getRenderColor(itemStack.getItemDamage());
+    }
+
+    @Override
+    public IIcon getIconFromDamage(int meta) {
+        return texture;
+    }
 }

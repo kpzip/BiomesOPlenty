@@ -2,16 +2,16 @@ package biomesoplenty.common.integration;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+
 import biomesoplenty.api.BOPBlockHelper;
 import biomesoplenty.api.BOPItemHelper;
 import biomesoplenty.api.content.BOPCBlocks;
 import biomesoplenty.api.content.BOPCItems;
 import cpw.mods.fml.common.event.FMLInterModComms;
 
-public class TreecapitatorIntegration
-{
-    public static void init()
-    {
+public class TreecapitatorIntegration {
+
+    public static void init() {
         String logs1 = BOPBlockHelper.getUniqueName(BOPCBlocks.logs1);
         String logs2 = BOPBlockHelper.getUniqueName(BOPCBlocks.logs2);
         String logs3 = BOPBlockHelper.getUniqueName(BOPCBlocks.logs3);
@@ -22,29 +22,38 @@ public class TreecapitatorIntegration
         String leaves2 = BOPBlockHelper.getUniqueName(BOPCBlocks.leaves2);
         String leaves3 = BOPBlockHelper.getUniqueName(BOPCBlocks.leaves3);
         String leaves4 = BOPBlockHelper.getUniqueName(BOPCBlocks.leaves4);
-        
+
         NBTTagCompound tpModCfg = new NBTTagCompound();
         tpModCfg.setString("modID", "BiomesOPlenty");
-        tpModCfg.setString("axeIDList", BOPItemHelper.getUniqueName(BOPCItems.axeAmethyst) + "; " +
-                BOPItemHelper.getUniqueName(BOPCItems.axeMud));
-        
+        tpModCfg.setString(
+            "axeIDList",
+            BOPItemHelper.getUniqueName(BOPCItems.axeAmethyst) + "; " + BOPItemHelper.getUniqueName(BOPCItems.axeMud));
+
         NBTTagList treeList = new NBTTagList();
-        
+
         /*
-        * NOTE: the vanilla trees (any tree that contains a vanilla log) are the only ones where treeName must be one of these values:
-        * vanilla_oak, vanilla_spruce, vanilla_birch, vanilla_jungle.
-        */
+         * NOTE: the vanilla trees (any tree that contains a vanilla log) are the only ones where treeName must be one
+         * of these values:
+         * vanilla_oak, vanilla_spruce, vanilla_birch, vanilla_jungle.
+         */
         // Vanilla Oak additions
         NBTTagCompound tree = new NBTTagCompound();
         tree.setString("treeName", "vanilla_oak");
         tree.setString("logs", "");
-        tree.setString("leaves", String.format("%s,0; %s,3; %s; %s,0; %s,0; %s,2; 18,2; 18,10",
-                leaves2, leaves2, BOPBlockHelper.getUniqueName(BOPCBlocks.appleLeaves),
-                BOPBlockHelper.getUniqueName(BOPCBlocks.persimmonLeaves), leaves2, leaves3));
-        
+        tree.setString(
+            "leaves",
+            String.format(
+                "%s,0; %s,3; %s; %s,0; %s,0; %s,2; 18,2; 18,10",
+                leaves2,
+                leaves2,
+                BOPBlockHelper.getUniqueName(BOPCBlocks.appleLeaves),
+                BOPBlockHelper.getUniqueName(BOPCBlocks.persimmonLeaves),
+                leaves2,
+                leaves3));
+
         tree.setBoolean("requireLeafDecayCheck", false);
         treeList.appendTag(tree);
-        
+
         // Vanilla Birch additions
         tree = new NBTTagCompound();
         tree.setString("treeName", "vanilla_birch");
@@ -52,7 +61,7 @@ public class TreecapitatorIntegration
         tree.setString("leaves", String.format("%s,0", leaves1));
         tree.setBoolean("requireLeafDecayCheck", false);
         treeList.appendTag(tree);
-        
+
         // Vanilla Jungle additions
         tree = new NBTTagCompound();
         tree.setString("treeName", "vanilla_jungle");
@@ -60,10 +69,10 @@ public class TreecapitatorIntegration
         tree.setString("leaves", "");
         tree.setInteger("maxLeafIDDist", 3);
         treeList.appendTag(tree);
-        
+
         /*
-        * logs1 trees
-        */
+         * logs1 trees
+         */
         // BoP sacred oak
         tree = new NBTTagCompound();
         tree.setString("treeName", "sacredoak");
@@ -92,10 +101,10 @@ public class TreecapitatorIntegration
         tree.setString("leaves", String.format("%s,1; %s,9", leaves2, leaves2));
         tree.setBoolean("requireLeafDecayCheck", false);
         treeList.appendTag(tree);
-        
+
         /*
-        * logs2 trees
-        */
+         * logs2 trees
+         */
         // BoP holy
         tree = new NBTTagCompound();
         tree.setString("treeName", "holy");
@@ -124,10 +133,10 @@ public class TreecapitatorIntegration
         tree.setString("leaves", String.format("%s,2; %s,10", leavesColorized1, leavesColorized1));
         tree.setBoolean("requireLeafDecayCheck", false);
         treeList.appendTag(tree);
-        
+
         /*
-        * logs3 trees
-        */
+         * logs3 trees
+         */
         // BoP redwood
         tree = new NBTTagCompound();
         tree.setString("treeName", "redwood");
@@ -156,10 +165,10 @@ public class TreecapitatorIntegration
         tree.setString("leaves", "" + BOPBlockHelper.getUniqueName(BOPCBlocks.petals));
         tree.setBoolean("requireLeafDecayCheck", false);
         treeList.appendTag(tree);
-        
+
         /*
-        * logs4 trees
-        */
+         * logs4 trees
+         */
         // BoP pine
         tree = new NBTTagCompound();
         tree.setString("treeName", "pine");
@@ -188,9 +197,9 @@ public class TreecapitatorIntegration
         tree.setString("leaves", String.format("%s,2; %s,10", leavesColorized2, leavesColorized2));
         tree.setBoolean("requireLeafDecayCheck", false);
         treeList.appendTag(tree);
-        
+
         tpModCfg.setTag("trees", treeList);
-        
+
         // bspkrs: I changed the mod ID, so just send messages to both for now.
         FMLInterModComms.sendMessage("TreeCapitator", "ThirdPartyModConfig", tpModCfg);
         FMLInterModComms.sendMessage("Treecapitator", "ThirdPartyModConfig", tpModCfg);

@@ -14,17 +14,17 @@ import forestry.api.core.INBTTagable;
  */
 public interface IGenome extends INBTTagable {
 
-	IAlleleSpecies getPrimary();
+    IAlleleSpecies getPrimary();
 
-	IAlleleSpecies getSecondary();
+    IAlleleSpecies getSecondary();
 
-	IChromosome[] getChromosomes();
+    IChromosome[] getChromosomes();
 
-	IAllele getActiveAllele(int chromosome);
+    IAllele getActiveAllele(int chromosome);
 
-	IAllele getInactiveAllele(int chromosome);
+    IAllele getInactiveAllele(int chromosome);
 
-	boolean isGeneticEqual(IGenome other);
-	
-	ISpeciesRoot getSpeciesRoot();
+    boolean isGeneticEqual(IGenome other);
+
+    ISpeciesRoot getSpeciesRoot();
 }

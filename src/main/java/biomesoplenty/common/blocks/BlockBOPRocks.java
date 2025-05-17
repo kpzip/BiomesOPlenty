@@ -11,148 +11,139 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+
 import biomesoplenty.BiomesOPlenty;
 
-public class BlockBOPRocks extends Block
-{
-	private static final String[] types = new String[] {"limestone", "limestonesmooth", "siltstone", "siltstonesmooth", "shale", "shalesmooth"};
-	private IIcon[] textures = {null, null, null};
+public class BlockBOPRocks extends Block {
 
-	public BlockBOPRocks()
-	{
-		//TODO: Material.rock
-		super(Material.rock);
-		
-		this.setHarvestLevel("pickaxe", 1, 0);
-		this.setHarvestLevel("pickaxe", 2, 2);
-		this.setHarvestLevel("pickaxe", 3, 4);
-		
-		//TODO setStepSound(Block.soundStoneFootstep)
-		this.setStepSound(Block.soundTypePiston);
-		
-		//TODO: this.setCreativeTab()
-		this.setCreativeTab(BiomesOPlenty.tabBiomesOPlenty);
-	}
+    private static final String[] types = new String[] { "limestone", "limestonesmooth", "siltstone", "siltstonesmooth",
+        "shale", "shalesmooth" };
+    private IIcon[] textures = { null, null, null };
 
-	@Override
-	//TODO:		registerIcons()
-	public void registerBlockIcons(IIconRegister iconRegister)
-	{
-		textures = new IIcon[types.length];
+    public BlockBOPRocks() {
+        // TODO: Material.rock
+        super(Material.rock);
 
-		for (int i = 0; i < types.length; ++i) {
-			textures[i] = iconRegister.registerIcon("biomesoplenty:"+types[i]);
-		}
-	}
+        this.setHarvestLevel("pickaxe", 1, 0);
+        this.setHarvestLevel("pickaxe", 2, 2);
+        this.setHarvestLevel("pickaxe", 3, 4);
 
-	@Override
-	//TODO:		 getIcon()
-	public IIcon getIcon(int side, int meta)
-	{
-		if (meta < 0 || meta >= textures.length) 
-		{
-			meta = 0;
-		}
+        // TODO setStepSound(Block.soundStoneFootstep)
+        this.setStepSound(Block.soundTypePiston);
 
-		return textures[meta];
-	}
+        // TODO: this.setCreativeTab()
+        this.setCreativeTab(BiomesOPlenty.tabBiomesOPlenty);
+    }
 
-	@Override
-	//TODO:	   getDamageValue()
-	public int getDamageValue(World world, int x, int y, int z) 
-	{
-		return world.getBlockMetadata(x, y, z);
-	}
+    @Override
+    // TODO: registerIcons()
+    public void registerBlockIcons(IIconRegister iconRegister) {
+        textures = new IIcon[types.length];
 
-	@Override
-	//TODO:		getSubBlocks()
-	public void getSubBlocks(Item block, CreativeTabs creativeTabs, List list) 
-	{
-		for (int i = 0; i < types.length; ++i) 
-		{
-			list.add(new ItemStack(block, 1, i));
-		}
-	}
+        for (int i = 0; i < types.length; ++i) {
+            textures[i] = iconRegister.registerIcon("biomesoplenty:" + types[i]);
+        }
+    }
 
-	@Override
-	//TODO     damageDropped()
-	public int damageDropped(int meta)
-	{
-		return meta == 0 ? 1 : meta;
-	}
+    @Override
+    // TODO: getIcon()
+    public IIcon getIcon(int side, int meta) {
+        if (meta < 0 || meta >= textures.length) {
+            meta = 0;
+        }
 
-	@Override
-	//TODO:		 getBlockHardness()
-	public float getBlockHardness(World world, int x, int y, int z)
-	{
-		int meta = world.getBlockMetadata(x, y, z);
-		//TODO:			 blockHardness
-		float hardness = blockHardness;
+        return textures[meta];
+    }
 
-		switch (meta)
-		{
-		case 0:
-			hardness = 3.0F;
-			break;
+    @Override
+    // TODO: getDamageValue()
+    public int getDamageValue(World world, int x, int y, int z) {
+        return world.getBlockMetadata(x, y, z);
+    }
 
-		case 1:
-			hardness = 1.5F;
-			break;
+    @Override
+    // TODO: getSubBlocks()
+    public void getSubBlocks(Item block, CreativeTabs creativeTabs, List list) {
+        for (int i = 0; i < types.length; ++i) {
+            list.add(new ItemStack(block, 1, i));
+        }
+    }
 
-		case 2:
-			hardness = 3.0F;
-			break;
-			
-		case 3:
-			hardness = 1.5F;
-			break;
+    @Override
+    // TODO damageDropped()
+    public int damageDropped(int meta) {
+        return meta == 0 ? 1 : meta;
+    }
 
-		case 4:
-			hardness = 3.0F;
-			break;
-			
-		case 5:
-			hardness = 1.5F;
-			break;
-		}
+    @Override
+    // TODO: getBlockHardness()
+    public float getBlockHardness(World world, int x, int y, int z) {
+        int meta = world.getBlockMetadata(x, y, z);
+        // TODO: blockHardness
+        float hardness = blockHardness;
 
-		return hardness;
-	}
+        switch (meta) {
+            case 0:
+                hardness = 3.0F;
+                break;
 
-	@Override
-	public float getExplosionResistance(Entity par1Entity, World world, int x, int y, int z, double explosionX, double explosionY, double explosionZ)
-	{
-		int meta = world.getBlockMetadata(x, y, z);
-		//TODO:			   blockResistance
-		float resistance = blockResistance;
+            case 1:
+                hardness = 1.5F;
+                break;
 
-		switch (meta)
-		{
-		case 0:
-			resistance = 5.0F;
-			break;
-		
-		case 1:
-			resistance = 7.0F;
-			break;
+            case 2:
+                hardness = 3.0F;
+                break;
 
-		case 2:
-			resistance = 5.0F;
-			break;
-			
-		case 3:
-			resistance = 7.0F;
-			break;
-			
-		case 4:
-			resistance = 5.0F;
-			break;
-			
-		case 5:
-			resistance = 7.0F;
-			break;
-		}
+            case 3:
+                hardness = 1.5F;
+                break;
 
-		return resistance / 5.0F;
-	}
+            case 4:
+                hardness = 3.0F;
+                break;
+
+            case 5:
+                hardness = 1.5F;
+                break;
+        }
+
+        return hardness;
+    }
+
+    @Override
+    public float getExplosionResistance(Entity par1Entity, World world, int x, int y, int z, double explosionX,
+        double explosionY, double explosionZ) {
+        int meta = world.getBlockMetadata(x, y, z);
+        // TODO: blockResistance
+        float resistance = blockResistance;
+
+        switch (meta) {
+            case 0:
+                resistance = 5.0F;
+                break;
+
+            case 1:
+                resistance = 7.0F;
+                break;
+
+            case 2:
+                resistance = 5.0F;
+                break;
+
+            case 3:
+                resistance = 7.0F;
+                break;
+
+            case 4:
+                resistance = 5.0F;
+                break;
+
+            case 5:
+                resistance = 7.0F;
+                break;
+        }
+
+        return resistance / 5.0F;
+    }
 }

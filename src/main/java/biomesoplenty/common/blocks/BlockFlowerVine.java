@@ -4,55 +4,51 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockVine;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.world.IBlockAccess;
+
 import biomesoplenty.BiomesOPlenty;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockFlowerVine extends BlockVine
-{
-	public BlockFlowerVine()
-	{
-		//TODO: this.setHardness
-		this.setHardness(0.2F);
-		
-		//TODO setStepSound(Block.soundGrassFootstep)
-		this.setStepSound(Block.soundTypeGrass);
-		
-		//TODO: setTickRandomly()
-		this.setTickRandomly(true);
-		
-		//TODO: this.setCreativeTab()
-		this.setCreativeTab(BiomesOPlenty.tabBiomesOPlenty);
-	}
+public class BlockFlowerVine extends BlockVine {
 
-	@Override
-	//TODO:		registerIcons()
-	public void registerBlockIcons(IIconRegister iconRegister)
-	{
-				//TODO: blockIcon
-		this.blockIcon = iconRegister.registerIcon("biomesoplenty:flowervine");
-	}
-	
-	@Override
+    public BlockFlowerVine() {
+        // TODO: this.setHardness
+        this.setHardness(0.2F);
+
+        // TODO setStepSound(Block.soundGrassFootstep)
+        this.setStepSound(Block.soundTypeGrass);
+
+        // TODO: setTickRandomly()
+        this.setTickRandomly(true);
+
+        // TODO: this.setCreativeTab()
+        this.setCreativeTab(BiomesOPlenty.tabBiomesOPlenty);
+    }
+
+    @Override
+    // TODO: registerIcons()
+    public void registerBlockIcons(IIconRegister iconRegister) {
+        // TODO: blockIcon
+        this.blockIcon = iconRegister.registerIcon("biomesoplenty:flowervine");
+    }
+
+    @Override
     @SideOnly(Side.CLIENT)
-    public int getBlockColor()
-    {
+    public int getBlockColor() {
         return 16777215;
     }
 
     // JAVADOC METHOD $$ func_149741_i
-	@Override
+    @Override
     @SideOnly(Side.CLIENT)
-    public int getRenderColor(int p_149741_1_)
-    {
+    public int getRenderColor(int p_149741_1_) {
         return 16777215;
     }
 
     // JAVADOC METHOD $$ func_149720_d
-	@Override
+    @Override
     @SideOnly(Side.CLIENT)
-    public int colorMultiplier(IBlockAccess p_149720_1_, int p_149720_2_, int p_149720_3_, int p_149720_4_)
-    {
+    public int colorMultiplier(IBlockAccess p_149720_1_, int p_149720_2_, int p_149720_3_, int p_149720_4_) {
         return 16777215;
     }
 }

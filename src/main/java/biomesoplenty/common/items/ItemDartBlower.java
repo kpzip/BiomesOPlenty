@@ -5,85 +5,77 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
 import biomesoplenty.BiomesOPlenty;
 import biomesoplenty.api.content.BOPCItems;
 import biomesoplenty.common.entities.projectiles.EntityDart;
 import biomesoplenty.common.entities.projectiles.EntityDart.DartType;
 
-public class ItemDartBlower extends Item
-{
-	public ItemDartBlower()
-	{
-		super();
-		
-		this.maxStackSize = 1;
-		this.setMaxDamage(63);
-		
-		this.setCreativeTab(BiomesOPlenty.tabBiomesOPlenty);
-	}
+public class ItemDartBlower extends Item {
 
-	@Override
-	public void registerIcons(IIconRegister iconRegister)
-	{
-		itemIcon = iconRegister.registerIcon("biomesoplenty:dartblower");
-	}
-	
-	@Override
-    public boolean isFull3D()
-    {
-		return true;
+    public ItemDartBlower() {
+        super();
+
+        this.maxStackSize = 1;
+        this.setMaxDamage(63);
+
+        this.setCreativeTab(BiomesOPlenty.tabBiomesOPlenty);
     }
 
-	@Override
-	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer par3EntityPlayer)
-	{
-		boolean flag = par3EntityPlayer.capabilities.isCreativeMode;
+    @Override
+    public void registerIcons(IIconRegister iconRegister) {
+        itemIcon = iconRegister.registerIcon("biomesoplenty:dartblower");
+    }
 
-		if (flag || par3EntityPlayer.inventory.hasItem(BOPCItems.dart))
-		{
-			EntityDart entityDart = new EntityDart(world, par3EntityPlayer, 1.0F);
+    @Override
+    public boolean isFull3D() {
+        return true;
+    }
 
-			itemStack.damageItem(1, par3EntityPlayer);
-			world.playSoundAtEntity(par3EntityPlayer, "random.bow", 1.0F, 2.0F / (1.0F * 0.4F + 1.2F) + 1.0F * 0.5F);
+    @Override
+    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer par3EntityPlayer) {
+        boolean flag = par3EntityPlayer.capabilities.isCreativeMode;
 
-			int slot = -1;
-			if (par3EntityPlayer.inventory.hasItemStack(new ItemStack(BOPCItems.dart, 1, 1)))
-			{
-				entityDart.setDartType(DartType.POISON);
+        if (flag || par3EntityPlayer.inventory.hasItem(BOPCItems.dart)) {
+            EntityDart entityDart = new EntityDart(world, par3EntityPlayer, 1.0F);
 
-				for (int k = 0; k < par3EntityPlayer.inventory.mainInventory.length; ++k)
-				{
-					if (par3EntityPlayer.inventory.mainInventory[k] != null && par3EntityPlayer.inventory.mainInventory[k].getItem() == BOPCItems.dart && par3EntityPlayer.inventory.mainInventory[k].getItemDamage() == 1)
-					{
-						slot = k;
-						break;
-					}
-				}
-			}
-			else if (par3EntityPlayer.inventory.hasItemStack(new ItemStack(BOPCItems.dart, 1, 0)))
-			{
-				entityDart.setDartType(DartType.NORMAL);
+            itemStack.damageItem(1, par3EntityPlayer);
+            world.playSoundAtEntity(par3EntityPlayer, "random.bow", 1.0F, 2.0F / (1.0F * 0.4F + 1.2F) + 1.0F * 0.5F);
 
-				for (int k = 0; k < par3EntityPlayer.inventory.mainInventory.length; ++k)
-				{
-					if (par3EntityPlayer.inventory.mainInventory[k] != null && par3EntityPlayer.inventory.mainInventory[k].getItem() == BOPCItems.dart && par3EntityPlayer.inventory.mainInventory[k].getItemDamage() == 0)
-					{
-						slot = k;
-						break;
-					}
-				}
-			}
+            int slot = -1;
+            if (par3EntityPlayer.inventory.hasItemStack(new ItemStack(BOPCItems.dart, 1, 1))) {
+                entityDart.setDartType(DartType.POISON);
 
-			if (!world.isRemote) 
-			{
-				world.spawnEntityInWorld(entityDart);
-			}
+                for (int k = 0; k < par3EntityPlayer.inventory.mainInventory.length; ++k) {
+                    if (par3EntityPlayer.inventory.mainInventory[k] != null
+                        && par3EntityPlayer.inventory.mainInventory[k].getItem() == BOPCItems.dart
+                        && par3EntityPlayer.inventory.mainInventory[k].getItemDamage() == 1) {
+                        slot = k;
+                        break;
+                    }
+                }
+            } else if (par3EntityPlayer.inventory.hasItemStack(new ItemStack(BOPCItems.dart, 1, 0))) {
+                entityDart.setDartType(DartType.NORMAL);
 
-			if (!flag && slot >= 0) {
-				par3EntityPlayer.inventory.decrStackSize(slot, 1);
-			}
-		}
+                for (int k = 0; k < par3EntityPlayer.inventory.mainInventory.length; ++k) {
+                    if (par3EntityPlayer.inventory.mainInventory[k] != null
+                        && par3EntityPlayer.inventory.mainInventory[k].getItem() == BOPCItems.dart
+                        && par3EntityPlayer.inventory.mainInventory[k].getItemDamage() == 0) {
+                        slot = k;
+                        break;
+                    }
+                }
+            }
 
-		return itemStack;
-	}
+            if (!world.isRemote) {
+                world.spawnEntityInWorld(entityDart);
+            }
+
+            if (!flag && slot >= 0) {
+                par3EntityPlayer.inventory.decrStackSize(slot, 1);
+            }
+        }
+
+        return itemStack;
+    }
 }

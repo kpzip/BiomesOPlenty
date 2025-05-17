@@ -11,42 +11,43 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public interface IPostRegistry {
-	
-	/* POST OFFICE */
-	IPostOffice getPostOffice(World world);
 
-	/* LETTERS */
-	boolean isLetter(ItemStack itemstack);
+    /* POST OFFICE */
+    IPostOffice getPostOffice(World world);
 
-	ILetter createLetter(MailAddress sender, MailAddress recipient);
-	
-	ILetter getLetter(ItemStack itemstack);
-	
-	ItemStack createLetterStack(ILetter letter);
-	
-	/* CARRIERS */
-	/**
-	 * Registers a new {@link IPostalCarrier}. See {@link IPostalCarrier} for details.
-	 * @param carrier {@link IPostalCarrier} to register.
-	 */
-	void registerCarrier(IPostalCarrier carrier);
-	
-	IPostalCarrier getCarrier(String uid);
+    /* LETTERS */
+    boolean isLetter(ItemStack itemstack);
 
-	Map<String, IPostalCarrier> getRegisteredCarriers();
+    ILetter createLetter(MailAddress sender, MailAddress recipient);
 
-	/* TRADE STATIONS */
-	void deleteTradeStation(World world, String moniker);
+    ILetter getLetter(ItemStack itemstack);
 
-	ITradeStation getOrCreateTradeStation(World world, String owner, String moniker);
+    ItemStack createLetterStack(ILetter letter);
 
-	ITradeStation getTradeStation(World world, String moniker);
+    /* CARRIERS */
+    /**
+     * Registers a new {@link IPostalCarrier}. See {@link IPostalCarrier} for details.
+     * 
+     * @param carrier {@link IPostalCarrier} to register.
+     */
+    void registerCarrier(IPostalCarrier carrier);
 
-	boolean isAvailableTradeMoniker(World world, String moniker);
+    IPostalCarrier getCarrier(String uid);
 
-	boolean isValidTradeMoniker(World world, String moniker);
+    Map<String, IPostalCarrier> getRegisteredCarriers();
 
-	/* PO BOXES */
-	boolean isValidPOBox(World world, String username);
+    /* TRADE STATIONS */
+    void deleteTradeStation(World world, String moniker);
+
+    ITradeStation getOrCreateTradeStation(World world, String owner, String moniker);
+
+    ITradeStation getTradeStation(World world, String moniker);
+
+    boolean isAvailableTradeMoniker(World world, String moniker);
+
+    boolean isValidTradeMoniker(World world, String moniker);
+
+    /* PO BOXES */
+    boolean isValidPOBox(World world, String username);
 
 }

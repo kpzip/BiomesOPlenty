@@ -4,25 +4,24 @@ import javax.swing.Icon;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemBlockPersimmonLeaves extends ItemBlock
-{
-	@SideOnly(Side.CLIENT)
-	private Icon texture;
+public class ItemBlockPersimmonLeaves extends ItemBlock {
 
-	public ItemBlockPersimmonLeaves(Block block)
-	{
-		super(block);
-		
-		this.setMaxDamage(0);
-		this.setHasSubtypes(true);
-	}
+    @SideOnly(Side.CLIENT)
+    private Icon texture;
 
-	@Override
-	public int getMetadata(int meta)
-	{
-		return meta;
-	}
+    public ItemBlockPersimmonLeaves(Block block) {
+        super(block);
+
+        this.setMaxDamage(0);
+        this.setHasSubtypes(true);
+    }
+
+    @Override
+    public int getMetadata(int meta) {
+        return meta;
+    }
 }

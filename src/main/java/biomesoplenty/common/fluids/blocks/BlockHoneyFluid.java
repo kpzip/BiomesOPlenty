@@ -1,6 +1,5 @@
 package biomesoplenty.common.fluids.blocks;
 
-import biomesoplenty.BiomesOPlenty;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -12,44 +11,39 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidFinite;
 import net.minecraftforge.fluids.FluidRegistry;
 
-public class BlockHoneyFluid extends BlockFluidFinite
-{
-	public static IIcon honeyStillIcon;
-	public static IIcon honeyFlowingIcon;
+public class BlockHoneyFluid extends BlockFluidFinite {
 
-	public BlockHoneyFluid()
-	{
-		//TODO:											  water
-		super(FluidRegistry.getFluid("honey"), Material.water);
+    public static IIcon honeyStillIcon;
+    public static IIcon honeyFlowingIcon;
 
-		//TODO: setLightOpacity()
-		this.setLightOpacity(1);
-	}
-	
-	@Override
-	//TODO:		onEntityCollidedWithBlock()
-	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
-	{
-		int meta = world.getBlockMetadata(x, y, z);
+    public BlockHoneyFluid() {
+        // TODO: water
+        super(FluidRegistry.getFluid("honey"), Material.water);
 
-		if (entity instanceof EntityLivingBase)
-		{
-			((EntityLivingBase)entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 200, 2));
-		}
-	}
+        // TODO: setLightOpacity()
+        this.setLightOpacity(1);
+    }
 
-	@Override
-	//TODO:		registerIcons()
-	public void registerBlockIcons(IIconRegister iconRegister)
-	{
-		honeyStillIcon = iconRegister.registerIcon("biomesoplenty:honey_still");
-		honeyFlowingIcon = iconRegister.registerIcon("biomesoplenty:honey_flowing");
-	}
+    @Override
+    // TODO: onEntityCollidedWithBlock()
+    public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
+        int meta = world.getBlockMetadata(x, y, z);
 
-	@Override
-	//TODO:		 getIcon()
-	public IIcon getIcon(int side, int meta)
-	{
-		return side != 0 && side != 1 ? honeyFlowingIcon : honeyStillIcon;
-	}
+        if (entity instanceof EntityLivingBase) {
+            ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 200, 2));
+        }
+    }
+
+    @Override
+    // TODO: registerIcons()
+    public void registerBlockIcons(IIconRegister iconRegister) {
+        honeyStillIcon = iconRegister.registerIcon("biomesoplenty:honey_still");
+        honeyFlowingIcon = iconRegister.registerIcon("biomesoplenty:honey_flowing");
+    }
+
+    @Override
+    // TODO: getIcon()
+    public IIcon getIcon(int side, int meta) {
+        return side != 0 && side != 1 ? honeyFlowingIcon : honeyStillIcon;
+    }
 }

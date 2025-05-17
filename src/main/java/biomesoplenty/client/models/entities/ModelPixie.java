@@ -5,18 +5,17 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
-public class ModelPixie extends ModelBase
-{
-  //fields
+public class ModelPixie extends ModelBase {
+
+    // fields
     ModelRenderer Body;
     ModelRenderer LeftWing;
     ModelRenderer RightWing;
-  
-    public ModelPixie()
-    {
-      textureWidth = 64;
-      textureHeight = 32;
-      
+
+    public ModelPixie() {
+        textureWidth = 64;
+        textureHeight = 32;
+
         Body = new ModelRenderer(this, 0, 0);
         Body.addBox(0F, 0F, 0F, 4, 4, 4);
         Body.setRotationPoint(-2F, 16F, -2F);
@@ -36,31 +35,28 @@ public class ModelPixie extends ModelBase
         RightWing.mirror = true;
         setRotation(RightWing, 0F, 0F, 0F);
     }
-    
+
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-    {
-      super.render(entity, f, f1, f2, f3, f4, f5);
-      setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-      Body.render(f5);
-      LeftWing.render(f5);
-      RightWing.render(f5);
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+        super.render(entity, f, f1, f2, f3, f4, f5);
+        setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+        Body.render(f5);
+        LeftWing.render(f5);
+        RightWing.render(f5);
     }
-    
-    private void setRotation(ModelRenderer model, float x, float y, float z)
-    {
-      model.rotateAngleX = x;
-      model.rotateAngleY = y;
-      model.rotateAngleZ = z;
+
+    private void setRotation(ModelRenderer model, float x, float y, float z) {
+        model.rotateAngleX = x;
+        model.rotateAngleY = y;
+        model.rotateAngleZ = z;
     }
-  
-  @Override
-  public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
-  {
-      super.setRotationAngles(f, f1, f2, f3, f4, f5, entity); 
-      
-      RightWing.rotateAngleY = -(MathHelper.cos(f2 * 1.7F) * (float)Math.PI * 0.5F);
-      LeftWing.rotateAngleY = MathHelper.cos(f2 * 1.7F) * (float)Math.PI * 0.5F;  
-  }
+
+    @Override
+    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
+        super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+
+        RightWing.rotateAngleY = -(MathHelper.cos(f2 * 1.7F) * (float) Math.PI * 0.5F);
+        LeftWing.rotateAngleY = MathHelper.cos(f2 * 1.7F) * (float) Math.PI * 0.5F;
+    }
 
 }

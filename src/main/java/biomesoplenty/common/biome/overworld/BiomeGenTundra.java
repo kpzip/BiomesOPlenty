@@ -8,22 +8,22 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase.Height;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenShrub;
+
 import biomesoplenty.api.content.BOPCBlocks;
 import biomesoplenty.common.biome.BOPOverworldBiome;
 import biomesoplenty.common.world.features.WorldGenBOPFlora;
 import biomesoplenty.common.world.features.WorldGenBOPTallGrass;
 
-public class BiomeGenTundra extends BOPOverworldBiome
-{
+public class BiomeGenTundra extends BOPOverworldBiome {
+
     private static final Height biomeHeight = new Height(0.0F, 0.1F);
-    
-    public BiomeGenTundra(int id)
-    {
+
+    public BiomeGenTundra(int id) {
         super(id);
-        
-        //TODO: setHeight()
+
+        // TODO: setHeight()
         this.setHeight(biomeHeight);
-        //TODO: setColor()
+        // TODO: setColor()
         this.setColor(11371606);
         this.setTemperatureRainfall(0.2F, 0.8F);
 
@@ -53,42 +53,36 @@ public class BiomeGenTundra extends BOPOverworldBiome
     }
 
     @Override
-    //TODO:                     getRandomWorldGenForTrees()
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
+    // TODO: getRandomWorldGenForTrees()
+    public WorldGenAbstractTree func_150567_a(Random random) {
         return new WorldGenShrub(0, 0);
     }
 
     @Override
-    public void decorate(World world, Random random, int chunkX, int chunkZ)
-    {
+    public void decorate(World world, Random random, int chunkX, int chunkZ) {
         super.decorate(world, random, chunkX, chunkZ);
         int var5 = 12 + random.nextInt(6);
 
-        for (int var6 = 0; var6 < var5; ++var6)
-        {
+        for (int var6 = 0; var6 < var5; ++var6) {
             int x = chunkX + random.nextInt(16);
             int y = random.nextInt(28) + 4;
             int z = chunkZ + random.nextInt(16);
 
             Block block = world.getBlock(x, y, z);
 
-            if (block != null && block.isReplaceableOreGen(world, x, y, z, Blocks.stone))
-            {
+            if (block != null && block.isReplaceableOreGen(world, x, y, z, Blocks.stone)) {
                 world.setBlock(x, y, z, BOPCBlocks.gemOre, 8, 2);
             }
         }
     }
 
     @Override
-    public int getBiomeGrassColor(int p_150558_1_, int p_150558_2_, int p_150558_3_)
-    {
+    public int getBiomeGrassColor(int p_150558_1_, int p_150558_2_, int p_150558_3_) {
         return 11371606;
     }
 
     @Override
-    public int getBiomeFoliageColor(int x, int y, int z)
-    {
+    public int getBiomeFoliageColor(int x, int y, int z) {
         return 12543566;
     }
 }

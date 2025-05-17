@@ -12,90 +12,78 @@ import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+
 import biomesoplenty.BiomesOPlenty;
 import biomesoplenty.api.content.BOPCItems;
 
-public class BlockAsh extends Block
-{
-	public BlockAsh()
-	{
-		super(Material.sand);
+public class BlockAsh extends Block {
 
-		this.setHardness(0.4F);	
-		this.setHarvestLevel("shovel", 0);
+    public BlockAsh() {
+        super(Material.sand);
 
-		this.setStepSound(Block.soundTypeSand);
+        this.setHardness(0.4F);
+        this.setHarvestLevel("shovel", 0);
 
-		this.setCreativeTab(BiomesOPlenty.tabBiomesOPlenty);
-	}
+        this.setStepSound(Block.soundTypeSand);
 
-	@Override
-	public void registerBlockIcons(IIconRegister iconRegister)
-	{
-		this.blockIcon = iconRegister.registerIcon("biomesoplenty:ashblock");
-	}
+        this.setCreativeTab(BiomesOPlenty.tabBiomesOPlenty);
+    }
 
-	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
-	{
-		float yOffset = 0.125F;
-		return AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 1 - yOffset, z + 1);
-	}
+    @Override
+    public void registerBlockIcons(IIconRegister iconRegister) {
+        this.blockIcon = iconRegister.registerIcon("biomesoplenty:ashblock");
+    }
 
-	@Override
-	public void randomDisplayTick(World world, int x, int y, int z, Random random)
-	{
-		super.randomDisplayTick(world, x, y, z, random);
+    @Override
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
+        float yOffset = 0.125F;
+        return AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 1 - yOffset, z + 1);
+    }
 
-		if (random.nextInt(2) == 0)
-		{
-			world.spawnParticle("smoke", x + random.nextFloat(), y + 1.1F, z + random.nextFloat(), 0.0D, 0.0D, 0.0D);
-		}
-	}
+    @Override
+    public void randomDisplayTick(World world, int x, int y, int z, Random random) {
+        super.randomDisplayTick(world, x, y, z, random);
 
-	@Override
-    public boolean isFireSource(World world, int x, int y, int z, ForgeDirection side)
-	{
-		if (side == ForgeDirection.UP)
-		{
-			return true;
-		}
-		
-		return false;
-	}
+        if (random.nextInt(2) == 0) {
+            world.spawnParticle("smoke", x + random.nextFloat(), y + 1.1F, z + random.nextFloat(), 0.0D, 0.0D, 0.0D);
+        }
+    }
 
-	@Override
-	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
-	{
-		if (entity instanceof EntityPlayer)
-		{
-			InventoryPlayer inventory = ((EntityPlayer)entity).inventory;
+    @Override
+    public boolean isFireSource(World world, int x, int y, int z, ForgeDirection side) {
+        if (side == ForgeDirection.UP) {
+            return true;
+        }
 
-			if (inventory.armorInventory[0] != null && inventory.armorInventory[0].getItem() == BOPCItems.wadingBoots)
-			{
-				return;
-			}
-		}
+        return false;
+    }
 
-		entity.motionX *= 0.4D;
-		entity.motionZ *= 0.4D;
-	}
+    @Override
+    public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
+        if (entity instanceof EntityPlayer) {
+            InventoryPlayer inventory = ((EntityPlayer) entity).inventory;
 
-	@Override
-	public Item getItemDropped(int metadata, Random random, int fortune)
-	{
-		return BOPCItems.misc;
-	}
+            if (inventory.armorInventory[0] != null && inventory.armorInventory[0].getItem() == BOPCItems.wadingBoots) {
+                return;
+            }
+        }
 
-	@Override
-	public int damageDropped(int meta)
-	{
-		return 1;
-	}
+        entity.motionX *= 0.4D;
+        entity.motionZ *= 0.4D;
+    }
 
-	@Override
-	public int quantityDropped(int meta, int fortune, Random random)
-	{
-		return 4;
-	}
+    @Override
+    public Item getItemDropped(int metadata, Random random, int fortune) {
+        return BOPCItems.misc;
+    }
+
+    @Override
+    public int damageDropped(int meta) {
+        return 1;
+    }
+
+    @Override
+    public int quantityDropped(int meta, int fortune, Random random) {
+        return 4;
+    }
 }

@@ -13,25 +13,25 @@ package forestry.api.core;
  * @author SirSengir
  */
 public interface IPlugin {
-	
-	/**
-	 * @return true if the plugin is to be loaded.
-	 */
-	public boolean isAvailable();
 
-	/**
-	 * Called during Forestry's @PreInit.
-	 */
-	public void preInit();
+    /**
+     * @return true if the plugin is to be loaded.
+     */
+    public boolean isAvailable();
 
-	/**
-	 * Called at the start of Forestry's @PostInit.
-	 */
-	public void doInit();
+    /**
+     * Called during Forestry's @PreInit.
+     */
+    public void preInit();
 
-	/**
-	 * Called at the end of Forestry's @PostInit.
-	 */
-	public void postInit();
+    /**
+     * Called at the start of Forestry's @PostInit.
+     */
+    public void doInit();
+
+    /**
+     * Called at the end of Forestry's @PostInit.
+     */
+    public void postInit();
 
 }

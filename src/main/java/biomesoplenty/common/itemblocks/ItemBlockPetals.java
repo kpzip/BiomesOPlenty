@@ -4,32 +4,29 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-public class ItemBlockPetals extends ItemBlock
-{
-	private static final String[] petals = new String[] {"bigflowerred", "bigfloweryellow"};
+public class ItemBlockPetals extends ItemBlock {
 
-	public ItemBlockPetals(Block block)
-	{
-		super(block);
-		
-		this.setMaxDamage(0);
-		this.setHasSubtypes(true);
-	}
+    private static final String[] petals = new String[] { "bigflowerred", "bigfloweryellow" };
 
-	@Override
-	public int getMetadata(int meta)
-	{
-		return meta & 15;
-	}
+    public ItemBlockPetals(Block block) {
+        super(block);
 
-	@Override
-	public String getUnlocalizedName(ItemStack itemStack)
-	{
-		int meta = itemStack.getItemDamage();
-		if (meta < 0 || meta >= petals.length) {
-			meta = 0;
-		}
+        this.setMaxDamage(0);
+        this.setHasSubtypes(true);
+    }
 
-		return super.getUnlocalizedName() + "." + petals[meta];
-	}
+    @Override
+    public int getMetadata(int meta) {
+        return meta & 15;
+    }
+
+    @Override
+    public String getUnlocalizedName(ItemStack itemStack) {
+        int meta = itemStack.getItemDamage();
+        if (meta < 0 || meta >= petals.length) {
+            meta = 0;
+        }
+
+        return super.getUnlocalizedName() + "." + petals[meta];
+    }
 }

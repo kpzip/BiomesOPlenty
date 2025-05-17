@@ -10,58 +10,56 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-public class RenderUtils 
-{
-	public static int foliageModel = -1;
-	public static int plantsModel = -1;
-	public static int bonesModel = -1;
-	public static int graveModel = -1;
-	public static int bambooModel = -1;
-	
-	public static void renderStandardInvBlock(RenderBlocks renderblocks, Block block, int meta)
-	{
-		Tessellator tessellator = Tessellator.instance;
-		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-		tessellator.startDrawingQuads();
-		tessellator.setNormal(0.0F, -1F, 0.0F);
-		//TODO:		renderFaceYNeg								   getIcon()
-		renderblocks.renderFaceYNeg(block, 0.0D, 0.0D, 0.0D, block.getIcon(0, meta));
-		tessellator.draw();
-		tessellator.startDrawingQuads();
-		tessellator.setNormal(0.0F, 1.0F, 0.0F);
-		//TODO:		renderFaceYPos								   getIcon()
-		renderblocks.renderFaceYPos(block, 0.0D, 0.0D, 0.0D, block.getIcon(1, meta));
-		tessellator.draw();
-		tessellator.startDrawingQuads();
-		tessellator.setNormal(0.0F, 0.0F, -1F);
-		//TODO:		renderFaceZNeg								   getIcon()
-		renderblocks.renderFaceZNeg(block, 0.0D, 0.0D, 0.0D, block.getIcon(2, meta));
-		tessellator.draw();
-		tessellator.startDrawingQuads();
-		tessellator.setNormal(0.0F, 0.0F, 1.0F);
-		//TODO:		renderFaceZPos								   getIcon()
-		renderblocks.renderFaceZPos(block, 0.0D, 0.0D, 0.0D, block.getIcon(3, meta));
-		tessellator.draw();
-		tessellator.startDrawingQuads();
-		tessellator.setNormal(-1F, 0.0F, 0.0F);
-		//TODO:		renderFaceXNeg								   getIcon()
-		renderblocks.renderFaceXNeg(block, 0.0D, 0.0D, 0.0D, block.getIcon(4, meta));
-		tessellator.draw();
-		tessellator.startDrawingQuads();
-		tessellator.setNormal(1.0F, 0.0F, 0.0F);
-		//TODO:		renderFaceXPos								   getIcon()
-		renderblocks.renderFaceXPos(block, 0.0D, 0.0D, 0.0D, block.getIcon(5, meta));
-		tessellator.draw();
-		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
-	}
-	
-    public static void renderIcon(IIcon icon, double size, double z, float nx, float ny, float nz) 
-    {
+public class RenderUtils {
+
+    public static int foliageModel = -1;
+    public static int plantsModel = -1;
+    public static int bonesModel = -1;
+    public static int graveModel = -1;
+    public static int bambooModel = -1;
+
+    public static void renderStandardInvBlock(RenderBlocks renderblocks, Block block, int meta) {
+        Tessellator tessellator = Tessellator.instance;
+        GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
+        tessellator.startDrawingQuads();
+        tessellator.setNormal(0.0F, -1F, 0.0F);
+        // TODO: renderFaceYNeg getIcon()
+        renderblocks.renderFaceYNeg(block, 0.0D, 0.0D, 0.0D, block.getIcon(0, meta));
+        tessellator.draw();
+        tessellator.startDrawingQuads();
+        tessellator.setNormal(0.0F, 1.0F, 0.0F);
+        // TODO: renderFaceYPos getIcon()
+        renderblocks.renderFaceYPos(block, 0.0D, 0.0D, 0.0D, block.getIcon(1, meta));
+        tessellator.draw();
+        tessellator.startDrawingQuads();
+        tessellator.setNormal(0.0F, 0.0F, -1F);
+        // TODO: renderFaceZNeg getIcon()
+        renderblocks.renderFaceZNeg(block, 0.0D, 0.0D, 0.0D, block.getIcon(2, meta));
+        tessellator.draw();
+        tessellator.startDrawingQuads();
+        tessellator.setNormal(0.0F, 0.0F, 1.0F);
+        // TODO: renderFaceZPos getIcon()
+        renderblocks.renderFaceZPos(block, 0.0D, 0.0D, 0.0D, block.getIcon(3, meta));
+        tessellator.draw();
+        tessellator.startDrawingQuads();
+        tessellator.setNormal(-1F, 0.0F, 0.0F);
+        // TODO: renderFaceXNeg getIcon()
+        renderblocks.renderFaceXNeg(block, 0.0D, 0.0D, 0.0D, block.getIcon(4, meta));
+        tessellator.draw();
+        tessellator.startDrawingQuads();
+        tessellator.setNormal(1.0F, 0.0F, 0.0F);
+        // TODO: renderFaceXPos getIcon()
+        renderblocks.renderFaceXPos(block, 0.0D, 0.0D, 0.0D, block.getIcon(5, meta));
+        tessellator.draw();
+        GL11.glTranslatef(0.5F, 0.5F, 0.5F);
+    }
+
+    public static void renderIcon(IIcon icon, double size, double z, float nx, float ny, float nz) {
         renderIcon(icon, 0.0D, 0.0D, size, size, z, nx, ny, nz);
     }
 
-    public static void renderIcon(IIcon icon, double xStart, double yStart, double xEnd, double yEnd, double z, float nx, float ny, float nz) 
-    {
+    public static void renderIcon(IIcon icon, double xStart, double yStart, double xEnd, double yEnd, double z,
+        float nx, float ny, float nz) {
         if (icon == null) icon = getMissingIcon(TextureMap.locationItemsTexture);
 
         Tessellator tessellator = Tessellator.instance;
@@ -69,15 +67,12 @@ public class RenderUtils
         tessellator.startDrawingQuads();
         tessellator.setNormal(nx, ny, nz);
 
-        if (nz > 0.0F) 
-        {
+        if (nz > 0.0F) {
             tessellator.addVertexWithUV(xStart, yStart, z, icon.getMinU(), icon.getMinV());
             tessellator.addVertexWithUV(xEnd, yStart, z, icon.getMaxU(), icon.getMinV());
             tessellator.addVertexWithUV(xEnd, yEnd, z, icon.getMaxU(), icon.getMaxV());
             tessellator.addVertexWithUV(xStart, yEnd, z, icon.getMinU(), icon.getMaxV());
-        } 
-        else 
-        {
+        } else {
             tessellator.addVertexWithUV(xStart, yEnd, z, icon.getMinU(), icon.getMaxV());
             tessellator.addVertexWithUV(xEnd, yEnd, z, icon.getMaxU(), icon.getMaxV());
             tessellator.addVertexWithUV(xEnd, yStart, z, icon.getMaxU(), icon.getMinV());
@@ -86,15 +81,14 @@ public class RenderUtils
 
         tessellator.draw();
     }
-    
-    public static void renderIcon(int indexX, int indexY, float minU, float maxU, float minV, float maxV, double z) 
-    {
+
+    public static void renderIcon(int indexX, int indexY, float minU, float maxU, float minV, float maxV, double z) {
         Tessellator tessellator = Tessellator.instance;
 
         tessellator.startDrawingQuads();
         tessellator.setNormal(0.0F, 0.0F, -1.0F);
-        
-        //0.5000098 0.5156152 0.71876955 0.74998045
+
+        // 0.5000098 0.5156152 0.71876955 0.74998045
 
         tessellator.addVertexWithUV(0D, 16D, z, minU, maxV);
         tessellator.addVertexWithUV(16D, 16D, z, maxU, maxV);
@@ -104,8 +98,9 @@ public class RenderUtils
         tessellator.draw();
     }
 
-    public static IIcon getMissingIcon(ResourceLocation textureSheet) 
-    {
-        return ((TextureMap)Minecraft.getMinecraft().getTextureManager().getTexture(textureSheet)).getAtlasSprite("missingno");
+    public static IIcon getMissingIcon(ResourceLocation textureSheet) {
+        return ((TextureMap) Minecraft.getMinecraft()
+            .getTextureManager()
+            .getTexture(textureSheet)).getAtlasSprite("missingno");
     }
 }

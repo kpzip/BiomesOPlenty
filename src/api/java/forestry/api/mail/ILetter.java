@@ -14,47 +14,47 @@ import forestry.api.core.INBTTagable;
 
 public interface ILetter extends IInventory, INBTTagable {
 
-	ItemStack[] getPostage();
+    ItemStack[] getPostage();
 
-	void setProcessed(boolean flag);
+    void setProcessed(boolean flag);
 
-	boolean isProcessed();
+    boolean isProcessed();
 
-	boolean isMailable();
+    boolean isMailable();
 
-	void setSender(MailAddress address);
+    void setSender(MailAddress address);
 
-	MailAddress getSender();
+    MailAddress getSender();
 
-	boolean hasRecipient();
+    boolean hasRecipient();
 
-	void setRecipient(MailAddress address);
+    void setRecipient(MailAddress address);
 
-	MailAddress[] getRecipients();
+    MailAddress[] getRecipients();
 
-	String getRecipientString();
+    String getRecipientString();
 
-	void setText(String text);
+    void setText(String text);
 
-	String getText();
+    String getText();
 
-	@SuppressWarnings("rawtypes")
-	void addTooltip(List list);
+    @SuppressWarnings("rawtypes")
+    void addTooltip(List list);
 
-	boolean isPostPaid();
+    boolean isPostPaid();
 
-	int requiredPostage();
+    int requiredPostage();
 
-	void invalidatePostage();
+    void invalidatePostage();
 
-	ItemStack[] getAttachments();
+    ItemStack[] getAttachments();
 
-	void addAttachment(ItemStack itemstack);
+    void addAttachment(ItemStack itemstack);
 
-	void addAttachments(ItemStack[] itemstacks);
+    void addAttachments(ItemStack[] itemstacks);
 
-	int countAttachments();
+    int countAttachments();
 
-	void addStamps(ItemStack stamps);
+    void addStamps(ItemStack stamps);
 
 }

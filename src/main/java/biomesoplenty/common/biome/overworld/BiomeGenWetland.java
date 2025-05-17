@@ -9,6 +9,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase.Height;
 import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
+
 import biomesoplenty.api.content.BOPCBlocks;
 import biomesoplenty.common.biome.BOPOverworldBiome;
 import biomesoplenty.common.world.features.WorldGenBOPDoubleFlora;
@@ -18,12 +19,11 @@ import biomesoplenty.common.world.features.WorldGenMoss;
 import biomesoplenty.common.world.features.trees.WorldGenBOPSwampTree;
 import biomesoplenty.common.world.features.trees.WorldGenBOPTaiga2;
 
-public class BiomeGenWetland extends BOPOverworldBiome
-{
+public class BiomeGenWetland extends BOPOverworldBiome {
+
     private static final Height biomeHeight = new Height(-0.1F, 0.2F);
 
-    public BiomeGenWetland(int id)
-    {
+    public BiomeGenWetland(int id) {
         super(id);
 
         this.setHeight(biomeHeight);
@@ -77,36 +77,38 @@ public class BiomeGenWetland extends BOPOverworldBiome
     }
 
     @Override
-    //TODO:                     getRandomWorldGenForTrees()
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-        return random.nextInt(2) == 0 ? new WorldGenBOPTaiga2(Blocks.log2, Blocks.leaves2, 1, 1, false, 9, 9, 6) : 
-        new WorldGenBOPSwampTree(BOPCBlocks.logs3, BOPCBlocks.colorizedLeaves2, 1, 0, 6, 9, BOPCBlocks.colorizedLeaves2, 0);
+    // TODO: getRandomWorldGenForTrees()
+    public WorldGenAbstractTree func_150567_a(Random random) {
+        return random.nextInt(2) == 0 ? new WorldGenBOPTaiga2(Blocks.log2, Blocks.leaves2, 1, 1, false, 9, 9, 6)
+            : new WorldGenBOPSwampTree(
+                BOPCBlocks.logs3,
+                BOPCBlocks.colorizedLeaves2,
+                1,
+                0,
+                6,
+                9,
+                BOPCBlocks.colorizedLeaves2,
+                0);
     }
 
-
     @Override
-    public void decorate(World world, Random random, int chunkX, int chunkZ)
-    {
+    public void decorate(World world, Random random, int chunkX, int chunkZ) {
         super.decorate(world, random, chunkX, chunkZ);
         int var5 = 12 + random.nextInt(6);
 
-        for (int i = 0; i < var5; ++i)
-        {
+        for (int i = 0; i < var5; ++i) {
             int x = chunkX + random.nextInt(16);
             int y = random.nextInt(28) + 4;
             int z = chunkZ + random.nextInt(16);
 
             Block block = world.getBlock(x, y, z);
 
-            if (block != null && block.isReplaceableOreGen(world, x, y, z, Blocks.stone))
-            {
+            if (block != null && block.isReplaceableOreGen(world, x, y, z, Blocks.stone)) {
                 world.setBlock(x, y, z, BOPCBlocks.gemOre, 10, 2);
             }
         }
 
-        for (int i = 0; i < 20; i++)
-        {
+        for (int i = 0; i < 20; i++) {
             int x = chunkX + random.nextInt(16) + 8;
             short y = 58;
             int z = chunkZ + random.nextInt(16) + 8;
@@ -116,28 +118,26 @@ public class BiomeGenWetland extends BOPOverworldBiome
     }
 
     @Override
-    public int getBiomeGrassColor(int x, int y, int z)
-    {
+    public int getBiomeGrassColor(int x, int y, int z) {
         return 5935967;
     }
 
     @Override
-    public int getBiomeFoliageColor(int x, int y, int z)
-    {
+    public int getBiomeFoliageColor(int x, int y, int z) {
         return 5215831;
     }
 
-    /*@Override
-	public int getFogColour()
-	{
-		return 6189472;
-	}
-
-    @Override
-    public float getFogCloseness()
-    {
-        // TODO Auto-generated method stub
-        return 0.8F;
-    }
+    /*
+     * @Override
+     * public int getFogColour()
+     * {
+     * return 6189472;
+     * }
+     * @Override
+     * public float getFogCloseness()
+     * {
+     * // TODO Auto-generated method stub
+     * return 0.8F;
+     * }
      */
 }

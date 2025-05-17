@@ -7,6 +7,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase.Height;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
+
 import biomesoplenty.api.content.BOPCBlocks;
 import biomesoplenty.common.biome.BOPOverworldBiome;
 import biomesoplenty.common.world.features.WorldGenBOPDoubleFlora;
@@ -14,23 +15,22 @@ import biomesoplenty.common.world.features.WorldGenBOPFlora;
 import biomesoplenty.common.world.features.WorldGenBOPTallGrass;
 import biomesoplenty.common.world.features.trees.WorldGenBOPBigTree;
 
-public class BiomeGenCherryBlossomGrove extends BOPOverworldBiome
-{
-	private static final Height biomeHeight = new Height(0.1F, 0.2F);
+public class BiomeGenCherryBlossomGrove extends BOPOverworldBiome {
 
-	public BiomeGenCherryBlossomGrove(int id)
-	{
-		super(id);
+    private static final Height biomeHeight = new Height(0.1F, 0.2F);
 
-        //TODO: setHeight()
+    public BiomeGenCherryBlossomGrove(int id) {
+        super(id);
+
+        // TODO: setHeight()
         this.setHeight(biomeHeight);
-        //TODO:	setColor()
+        // TODO: setColor()
         this.setColor(16289679);
         this.setTemperatureRainfall(0.7F, 0.8F);
-		
-		this.theBiomeDecorator.treesPerChunk = 3;
-		this.theBiomeDecorator.grassPerChunk = 15;
-		this.theBiomeDecorator.flowersPerChunk = 4;
+
+        this.theBiomeDecorator.treesPerChunk = 3;
+        this.theBiomeDecorator.grassPerChunk = 15;
+        this.theBiomeDecorator.flowersPerChunk = 4;
 
         this.theBiomeDecorator.bopFeatures.bopFlowersPerChunk = 30;
         this.theBiomeDecorator.bopFeatures.shrubsPerChunk = 2;
@@ -49,47 +49,42 @@ public class BiomeGenCherryBlossomGrove extends BOPOverworldBiome
         this.theBiomeDecorator.bopFeatures.weightedGrassGen.put(new WorldGenBOPTallGrass(BOPCBlocks.foliage, 10), 0.5D);
         this.theBiomeDecorator.bopFeatures.weightedGrassGen.put(new WorldGenBOPTallGrass(BOPCBlocks.foliage, 11), 0.5D);
         this.theBiomeDecorator.bopFeatures.weightedGrassGen.put(new WorldGenBOPTallGrass(Blocks.tallgrass, 1), 1D);
-	}
+    }
 
-	@Override
-	//TODO:						getRandomWorldGenForTrees()
-	public WorldGenAbstractTree func_150567_a(Random random)
-	{
-		return random.nextInt(3) == 0 ? new WorldGenBOPBigTree(BOPCBlocks.logs1, BOPCBlocks.leaves3, 1, 3) : new WorldGenBOPBigTree(BOPCBlocks.logs1, BOPCBlocks.leaves3, 1, 1);
-	}
-	
-	@Override
-	public void decorate(World world, Random random, int chunkX, int chunkZ)
-	{
-		super.decorate(world, random, chunkX, chunkZ);
-		int var5 = 12 + random.nextInt(6);
+    @Override
+    // TODO: getRandomWorldGenForTrees()
+    public WorldGenAbstractTree func_150567_a(Random random) {
+        return random.nextInt(3) == 0 ? new WorldGenBOPBigTree(BOPCBlocks.logs1, BOPCBlocks.leaves3, 1, 3)
+            : new WorldGenBOPBigTree(BOPCBlocks.logs1, BOPCBlocks.leaves3, 1, 1);
+    }
 
-		for (int var6 = 0; var6 < var5; ++var6)
-		{
-			int x = chunkX + random.nextInt(16);
-			int y = random.nextInt(28) + 4;
-			int z = chunkZ + random.nextInt(16);
+    @Override
+    public void decorate(World world, Random random, int chunkX, int chunkZ) {
+        super.decorate(world, random, chunkX, chunkZ);
+        int var5 = 12 + random.nextInt(6);
 
-			Block block = world.getBlock(x, y, z);
+        for (int var6 = 0; var6 < var5; ++var6) {
+            int x = chunkX + random.nextInt(16);
+            int y = random.nextInt(28) + 4;
+            int z = chunkZ + random.nextInt(16);
 
-			if (block != null && block.isReplaceableOreGen(world, x, y, z, Blocks.stone))
-			{
-				world.setBlock(x, y, z, BOPCBlocks.gemOre, 6, 2);
-			}
-		}
-	}
+            Block block = world.getBlock(x, y, z);
 
-	@Override
-	//TODO:		getBiomeGrassColor()
-	public int getBiomeGrassColor(int x, int y, int z)
-	{
-		return 10747818;
-	}
+            if (block != null && block.isReplaceableOreGen(world, x, y, z, Blocks.stone)) {
+                world.setBlock(x, y, z, BOPCBlocks.gemOre, 6, 2);
+            }
+        }
+    }
 
-	@Override
-	//TODO:		getBiomeFoliageColor()
-	public int getBiomeFoliageColor(int x, int y, int z)
-	{
-		return 10747818;
-	}
+    @Override
+    // TODO: getBiomeGrassColor()
+    public int getBiomeGrassColor(int x, int y, int z) {
+        return 10747818;
+    }
+
+    @Override
+    // TODO: getBiomeFoliageColor()
+    public int getBiomeFoliageColor(int x, int y, int z) {
+        return 10747818;
+    }
 }

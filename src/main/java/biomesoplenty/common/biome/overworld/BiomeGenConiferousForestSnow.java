@@ -7,6 +7,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase.Height;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
+
 import biomesoplenty.api.content.BOPCBlocks;
 import biomesoplenty.common.biome.BOPOverworldBiome;
 import biomesoplenty.common.world.features.WorldGenBOPDoubleFlora;
@@ -15,18 +16,17 @@ import biomesoplenty.common.world.features.WorldGenBOPTallGrass;
 import biomesoplenty.common.world.features.trees.WorldGenBOPTaiga2;
 import biomesoplenty.common.world.features.trees.WorldGenBOPTaiga3;
 
-public class BiomeGenConiferousForestSnow extends BOPOverworldBiome
-{
+public class BiomeGenConiferousForestSnow extends BOPOverworldBiome {
+
     private static final Height biomeHeight = new Height(0.1F, 0.3F);
-    
-    public BiomeGenConiferousForestSnow(int id)
-    {
+
+    public BiomeGenConiferousForestSnow(int id) {
         super(id);
-        
-        //TODO: setHeight()
+
+        // TODO: setHeight()
         this.setHeight(biomeHeight);
         this.setEnableSnow();
-        //TODO: setColor()
+        // TODO: setColor()
         this.setColor(16777215);
         this.setTemperatureRainfall(0.0F, 0.5F);
 
@@ -35,7 +35,7 @@ public class BiomeGenConiferousForestSnow extends BOPOverworldBiome
         this.theBiomeDecorator.treesPerChunk = 2;
         this.theBiomeDecorator.mushroomsPerChunk = 4;
         this.theBiomeDecorator.flowersPerChunk = -999;
-        //                     gravelPerChunk
+        // gravelPerChunk
         this.theBiomeDecorator.sandPerChunk = -999;
         this.theBiomeDecorator.sandPerChunk2 = -999;
 
@@ -55,33 +55,31 @@ public class BiomeGenConiferousForestSnow extends BOPOverworldBiome
         this.theBiomeDecorator.bopFeatures.weightedGrassGen.put(new WorldGenBOPDoubleFlora(3, 64), 0.25D);
     }
 
-	@Override
-    //TODO:                     getRandomWorldGenForTrees()
-    public WorldGenAbstractTree func_150567_a(Random random)
-    {
-		return random.nextInt(6) == 0 ? new WorldGenBOPTaiga2(BOPCBlocks.logs1, BOPCBlocks.leaves2, 3, 1, false, 10, 10, 5) :
-		(random.nextInt(3) == 0 ? new WorldGenBOPTaiga2(BOPCBlocks.logs1, BOPCBlocks.leaves2, 3, 1, false, 20, 15, 4) : 
-		new WorldGenBOPTaiga3(BOPCBlocks.logs1, BOPCBlocks.leaves2, 3, 1, false, 35, 10, 0));
-	}
+    @Override
+    // TODO: getRandomWorldGenForTrees()
+    public WorldGenAbstractTree func_150567_a(Random random) {
+        return random.nextInt(6) == 0
+            ? new WorldGenBOPTaiga2(BOPCBlocks.logs1, BOPCBlocks.leaves2, 3, 1, false, 10, 10, 5)
+            : (random.nextInt(3) == 0
+                ? new WorldGenBOPTaiga2(BOPCBlocks.logs1, BOPCBlocks.leaves2, 3, 1, false, 20, 15, 4)
+                : new WorldGenBOPTaiga3(BOPCBlocks.logs1, BOPCBlocks.leaves2, 3, 1, false, 35, 10, 0));
+    }
 
     @Override
-    public void decorate(World world, Random random, int chunkX, int chunkZ)
-    {
+    public void decorate(World world, Random random, int chunkX, int chunkZ) {
         super.decorate(world, random, chunkX, chunkZ);
         int var5 = 12 + random.nextInt(6);
 
-        for (int var6 = 0; var6 < var5; ++var6)
-        {
+        for (int var6 = 0; var6 < var5; ++var6) {
             int x = chunkX + random.nextInt(16);
             int y = random.nextInt(28) + 4;
             int z = chunkZ + random.nextInt(16);
-            
-            //TODO:             getBlock()
+
+            // TODO: getBlock()
             Block block = world.getBlock(x, y, z);
 
-            if (block != null && block.isReplaceableOreGen(world, x, y, z, Blocks.stone))
-            {
-                //TODO: setBlock()
+            if (block != null && block.isReplaceableOreGen(world, x, y, z, Blocks.stone)) {
+                // TODO: setBlock()
                 world.setBlock(x, y, z, BOPCBlocks.gemOre, 8, 2);
             }
         }

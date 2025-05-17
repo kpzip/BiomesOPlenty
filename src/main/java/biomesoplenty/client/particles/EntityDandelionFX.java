@@ -9,96 +9,114 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
 
-public class EntityDandelionFX extends EntityFX
-{
-	private static final ResourceLocation texture = new ResourceLocation("biomesoplenty:textures/particles/dandelion.png");
+public class EntityDandelionFX extends EntityFX {
+
+    private static final ResourceLocation texture = new ResourceLocation(
+        "biomesoplenty:textures/particles/dandelion.png");
     private static final ResourceLocation particles = new ResourceLocation("textures/particle/particles.png");
-	
-	public EntityDandelionFX(World par1World, double par2, double par4, double par6, float par8)
-	{
-		super(par1World, par2, par4, par6, 0.0D, 0.0D, 0.0D);
-		motionX *= 0.20000000149011612D;
-		motionY *= 0.10000000149011612D;
-		motionZ *= 0.20000000149011612D;
 
-		float f4 = (float)Math.random() * 0.4F + 0.6F;
-		particleScale *= 0.25F;
-		particleScale *= par8;
-		particleMaxAge = (int)(8.0D / (Math.random() * 0.8D + 0.2D));
-		particleMaxAge = (int)(particleMaxAge * par8);
-		noClip = false;
+    public EntityDandelionFX(World par1World, double par2, double par4, double par6, float par8) {
+        super(par1World, par2, par4, par6, 0.0D, 0.0D, 0.0D);
+        motionX *= 0.20000000149011612D;
+        motionY *= 0.10000000149011612D;
+        motionZ *= 0.20000000149011612D;
 
-		this.setSize(0.01F, 0.01F);
-	}
+        float f4 = (float) Math.random() * 0.4F + 0.6F;
+        particleScale *= 0.25F;
+        particleScale *= par8;
+        particleMaxAge = (int) (8.0D / (Math.random() * 0.8D + 0.2D));
+        particleMaxAge = (int) (particleMaxAge * par8);
+        noClip = false;
 
-	@Override
-	public void renderParticle(Tessellator tessellator, float par2, float par3, float par4, float par5, float par6, float par7)
-	{
-		tessellator.draw();
-		GL11.glPushMatrix();
+        this.setSize(0.01F, 0.01F);
+    }
 
-		GL11.glDepthMask(false);
-		GL11.glEnable(3042);
+    @Override
+    public void renderParticle(Tessellator tessellator, float par2, float par3, float par4, float par5, float par6,
+        float par7) {
+        tessellator.draw();
+        GL11.glPushMatrix();
 
-		FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture);
+        GL11.glDepthMask(false);
+        GL11.glEnable(3042);
 
-		float sizeFactor = 0.1F * particleScale;
-		float var13 = (float)(prevPosX + (posX - prevPosX) * par2 - EntityFX.interpPosX);
-		float var14 = (float)(prevPosY + (posY - prevPosY) * par2 - EntityFX.interpPosY);
-		float var15 = (float)(prevPosZ + (posZ - prevPosZ) * par2 - EntityFX.interpPosZ);
+        FMLClientHandler.instance()
+            .getClient().renderEngine.bindTexture(texture);
 
-		tessellator.startDrawingQuads();
-		tessellator.setBrightness(240);
+        float sizeFactor = 0.1F * particleScale;
+        float var13 = (float) (prevPosX + (posX - prevPosX) * par2 - EntityFX.interpPosX);
+        float var14 = (float) (prevPosY + (posY - prevPosY) * par2 - EntityFX.interpPosY);
+        float var15 = (float) (prevPosZ + (posZ - prevPosZ) * par2 - EntityFX.interpPosZ);
 
-		tessellator.setColorRGBA_F(particleRed, particleGreen, particleBlue, 1.0F);
-		tessellator.addVertexWithUV(var13 - par3 * sizeFactor - par6 * sizeFactor, var14 - par4 * sizeFactor, var15 - par5 * sizeFactor - par7 * sizeFactor, 0.0D, 1.0D);
-		tessellator.addVertexWithUV(var13 - par3 * sizeFactor + par6 * sizeFactor, var14 + par4 * sizeFactor, var15 - par5 * sizeFactor + par7 * sizeFactor, 1.0D, 1.0D);
-		tessellator.addVertexWithUV(var13 + par3 * sizeFactor + par6 * sizeFactor, var14 + par4 * sizeFactor, var15 + par5 * sizeFactor + par7 * sizeFactor, 1.0D, 0.0D);
-		tessellator.addVertexWithUV(var13 + par3 * sizeFactor - par6 * sizeFactor, var14 - par4 * sizeFactor, var15 + par5 * sizeFactor - par7 * sizeFactor, 0.0D, 0.0D);
+        tessellator.startDrawingQuads();
+        tessellator.setBrightness(240);
 
-		tessellator.draw();
+        tessellator.setColorRGBA_F(particleRed, particleGreen, particleBlue, 1.0F);
+        tessellator.addVertexWithUV(
+            var13 - par3 * sizeFactor - par6 * sizeFactor,
+            var14 - par4 * sizeFactor,
+            var15 - par5 * sizeFactor - par7 * sizeFactor,
+            0.0D,
+            1.0D);
+        tessellator.addVertexWithUV(
+            var13 - par3 * sizeFactor + par6 * sizeFactor,
+            var14 + par4 * sizeFactor,
+            var15 - par5 * sizeFactor + par7 * sizeFactor,
+            1.0D,
+            1.0D);
+        tessellator.addVertexWithUV(
+            var13 + par3 * sizeFactor + par6 * sizeFactor,
+            var14 + par4 * sizeFactor,
+            var15 + par5 * sizeFactor + par7 * sizeFactor,
+            1.0D,
+            0.0D);
+        tessellator.addVertexWithUV(
+            var13 + par3 * sizeFactor - par6 * sizeFactor,
+            var14 - par4 * sizeFactor,
+            var15 + par5 * sizeFactor - par7 * sizeFactor,
+            0.0D,
+            0.0D);
 
-		GL11.glDisable(3042);
-		GL11.glDepthMask(true);
+        tessellator.draw();
 
-		GL11.glPopMatrix();
+        GL11.glDisable(3042);
+        GL11.glDepthMask(true);
 
-		FMLClientHandler.instance().getClient().renderEngine.bindTexture(particles);
-		tessellator.startDrawingQuads();
-	}
+        GL11.glPopMatrix();
 
-	/**
-	 * Called to update the entity's position/logic.
-	 */
-	@Override
-	public void onUpdate()
-	{
-		prevPosX = posX;
-		prevPosY = posY;
-		prevPosZ = posZ;
+        FMLClientHandler.instance()
+            .getClient().renderEngine.bindTexture(particles);
+        tessellator.startDrawingQuads();
+    }
 
-		if (particleAge++ >= particleMaxAge)
-		{
-			this.setDead();
-		}
+    /**
+     * Called to update the entity's position/logic.
+     */
+    @Override
+    public void onUpdate() {
+        prevPosX = posX;
+        prevPosY = posY;
+        prevPosZ = posZ;
 
-		motionY += 0.004D;
-		this.moveEntity(motionX, motionY, motionZ);
+        if (particleAge++ >= particleMaxAge) {
+            this.setDead();
+        }
 
-		if (posY == prevPosY)
-		{
-			motionX *= 1.1D;
-			motionZ *= 1.1D;
-		}
+        motionY += 0.004D;
+        this.moveEntity(motionX, motionY, motionZ);
 
-		motionX *= 0.9599999785423279D;
-		motionY *= 0.9599999785423279D;
-		motionZ *= 0.9599999785423279D;
+        if (posY == prevPosY) {
+            motionX *= 1.1D;
+            motionZ *= 1.1D;
+        }
 
-		if (onGround)
-		{
-			motionX *= 0.699999988079071D;
-			motionZ *= 0.699999988079071D;
-		}
-	}
+        motionX *= 0.9599999785423279D;
+        motionY *= 0.9599999785423279D;
+        motionZ *= 0.9599999785423279D;
+
+        if (onGround) {
+            motionX *= 0.699999988079071D;
+            motionZ *= 0.699999988079071D;
+        }
+    }
 }
